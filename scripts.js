@@ -185,10 +185,12 @@ function searchWeather() {
   }
 }
 
-// Function to display the popup after 20 seconds
-function displayPopup() {
-  const popup = document.getElementById('popup');
-  popup.style.display = 'block';
+function displayPopupOnDesktop() {
+  const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+  if (!isMobile) {
+    const popup = document.getElementById('popup');
+    popup.style.display = 'block';
+  }
 }
 
 // Function to close the popup
@@ -197,8 +199,8 @@ function closePopup() {
   popup.style.display = 'none';
 }
 
-// Set timeout to display the popup after 20 seconds
-setTimeout(displayPopup, 20000); // 20 seconds in milliseconds
+// Set timeout to display the popup after 20 seconds for desktop devices
+setTimeout(displayPopupOnDesktop, 20000); // 20 seconds in milliseconds
 
 const konamiCode = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
 let konamiCodeIndex = 0;
