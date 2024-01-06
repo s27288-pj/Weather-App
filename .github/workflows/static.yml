@@ -28,7 +28,7 @@ jobs:
         uses: JamesIves/github-pages-deploy-action@4.2.0
         with:
           branch: gh-pages
-          folder: ./
+          folder: ./main
           token: ${{ secrets.GITHUB_TOKEN }}
 
       # Use the API key in your build process
