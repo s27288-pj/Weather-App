@@ -18,8 +18,8 @@ window.onload = function () {
   }
 };
 
-const apiKey = 'e9a0824a1e90c45f262aa4a15de73a21';
-const mapboxToken = 'pk.eyJ1IjoiczI3Mjg4IiwiYSI6ImNscjI2cGZveTA5eGsyam1wd20zb2dodjAifQ.e3K5AHnJvxXHclYQCIcnmg';
+const apiKey = process.env.REACT_APP_OPENWEATHERMAPAPI;
+const mapboxToken = process.env.REACT_APP_MAPBOXTOKEN;
 
 // Function to fetch location suggestions from MapBox API
 async function getLocationSuggestions(query) {
@@ -200,7 +200,8 @@ function closePopup() {
 }
 
 // Set timeout to display the popup after 20 seconds for desktop devices
-setTimeout(displayPopupOnDesktop, 20000); // 20 seconds in milliseconds
+setTimeout(displayPopupOnDesktop, 5000); // 20 seconds in milliseconds 
+// TODO: Change to 20 seconds
 
 const konamiCode = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
 let konamiCodeIndex = 0;
