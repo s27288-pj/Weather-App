@@ -165,7 +165,7 @@ async function searchWeather() {
 }
 
 // Function to handle search when button is clicked or Enter is pressed
-function searchWeather() {
+function searchWeatherOnClick() {
   const locationInput = document.getElementById('location-input').value;
 
   if (locationInput.length > 0) {
@@ -228,12 +228,12 @@ const inputField = document.getElementById('location-input');
 inputField.addEventListener('input', handleInput);
 
 const searchButton = document.querySelector('button');
-searchButton.addEventListener('click', searchWeather);
+searchButton.addEventListener('click', searchWeatherOnClick);
 
 // Handle Enter key press
 inputField.addEventListener('keypress', function(event) {
   if (event.key === 'Enter') {
-    searchWeather();
+    searchWeatherOnClick();
   }
 });
 
