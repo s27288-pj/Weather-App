@@ -7,23 +7,38 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
-  <!-- Popup content -->
-  <div class="popup-container" id="popup">
-    <p>Try the Konami Code!</p>
+  <div id="popup">
+    <p class="popup-text">Try mobile version of the website</p>
+    <p class="popup-text">Try the Konami Code!</p>
     <button onclick="closePopup()">Close</button>
   </div>
 
-  <button onclick="toggleMode()" class="toggle-button">Toggle Mode</button>
-  <h1>Weather App</h1>
-  <div class="search-container">
-    <input type="text" id="location-input" placeholder="Enter location...">
-    <button onclick="searchWeather()">Search</button>
+  <div id="header-container">
+    <div id="weather-app-icon">
+      <img src="images/015-meteorology.png" alt="Weather App Icon">
+    </div>
+    <div id="weather-app-title">
+      <h1>Weather App</h1>
+    </div>
+    <div class="mode-switch">
+      <input type="range" min="1" max="3" value="2" class="slider" id="modeSlider">
+      <p>Mode: <span id="modeText">Default</span></p>
+    </div>
   </div>
-  <ul id="suggestions-list"></ul>
+  
+  <div id="search-container">
+    <div id="location-input-div">
+      <input type="text" id="location-input-field" placeholder="Enter location...">
+    </div>
+    <div id="search-button-div">
+      <button id="search-button" onclick="searchWeatherOnClick()">Search</button>
+    </div>    
+  </div>
+  
+  <div id="suggestions-list" style="display: block;"></div>
 
-  <div class="weather-container">
-    <div id="current-weather-title" style="display: none;"><h2>Current Weather</h2> </div>
-    <div id="current-weather"></div>
+  <div id="weather-container">
+    <div id="current-weather" style="display: none;"></div>
     <h2 id="forecast-title" style="display: none;">Forecast</h2>
     <div class="forecast-table-container">
       <table id="forecast-table" class="forecast-table" style="display: none;">
