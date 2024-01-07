@@ -4,9 +4,11 @@
 // TODO: 
 
 // TODO: Change before commit
+const apiKey = 'e9a0824a1e90c45f262aa4a15de73a21';
+const mapboxToken = 'pk.eyJ1IjoiczI3Mjg4IiwiYSI6ImNscjI2cGZveTA5eGsyam1wd20zb2dodjAifQ.e3K5AHnJvxXHclYQCIcnmg';
 
-const apiKey = process.env.REACT_APP_OPENWEATHERMAPAPI;
-const mapboxToken = process.env.REACT_APP_MAPBOXTOKEN;
+// const apiKey = process.env.REACT_APP_OPENWEATHERMAPAPI;
+// const mapboxToken = process.env.REACT_APP_MAPBOXTOKEN;
 
 const modeSlider = document.getElementById('modeSlider');
 const modeText = document.getElementById('modeText');
