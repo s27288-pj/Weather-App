@@ -15,7 +15,7 @@
 
   <div id="header-container">
     <div id="weather-app-icon">
-      <img src="images/015-meteorology.png" alt="Weather App Icon">
+      <img src="images/001-meteorology.png" alt="Weather App Icon">
     </div>
     <div id="weather-app-title">
       <h1>Weather App</h1>
@@ -35,12 +35,21 @@
     </div>    
   </div>
   
-  <div id="suggestions-list" style="display: block;"></div>
+  <div id="suggestions-list" style="display: none;"></div>
 
-  <div id="weather-container">
-    <div id="current-weather" style="display: none;"></div>
-    <h2 id="forecast-title" style="display: none;">Forecast</h2>
-    <div class="forecast-table-container">
+  <div id="current-weather-container" style="display: none;">
+    <div id="current-weather-title" style="display: none;"></div>
+    <div id="current-weather-box">
+      <div id="current-weather"></div>
+      <div id="current-weather-icon"></div>
+    </div>
+  </div>  
+  <div id="forecast-container" style="display: none;">
+    <div id="forecast-title" style="display: none;">
+      <h2 id="forecast-title-h2" style="display: none;">Forecast</h2>
+    </div>
+
+    <div id="forecast-table-container">
       <table id="forecast-table" class="forecast-table" style="display: none;">
         <thead>
           <tr>

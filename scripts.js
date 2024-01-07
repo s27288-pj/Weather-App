@@ -10,6 +10,10 @@ const mapboxToken = 'pk.eyJ1IjoiczI3Mjg4IiwiYSI6ImNscjI2cGZveTA5eGsyam1wd20zb2do
 // const apiKey = process.env.REACT_APP_OPENWEATHERMAPAPI;
 // const mapboxToken = process.env.REACT_APP_MAPBOXTOKEN;
 
+function capitalizeFirstLetter(string) {
+  return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
 const modeSlider = document.getElementById('modeSlider');
 const modeText = document.getElementById('modeText');
 const MODE_KEY = 'websiteMode';
@@ -130,18 +134,76 @@ async function getForecastData(latitude, longitude) {
 
 // Function to display current weather
 function displayCurrentWeather(weather, place_name) {
+  const currentWeatherTitle = document.getElementById('current-weather-title');
+  currentWeatherTitle.innerHTML = `<h2>Current Weather in ${place_name}</h2>`;
+
   const currentWeatherElement = document.getElementById('current-weather');
   currentWeatherElement.innerHTML = `
-    <h3>Current Weather in ${place_name}</h3>
-    <p>Temperature: ${weather.main.temp}°C</p>
-    <p>Feels Like: ${weather.main.feels_like}°C</p>
-    <p>Pressure: ${weather.main.pressure} hPa</p>
-    <p>Humidity: ${weather.main.humidity}%</p>
+    <p>Weather: ${capitalizeFirstLetter(weather.weather[0].description)}</p>
+    <p>Temperature: ${Math.round(weather.main.temp)}°C</p>
+    <p>Feels Like: ${Math.round(weather.main.feels_like)}°C</p>
+    <p>Humidity: ${Math.round(weather.main.humidity)}%</p>
+    <p>Wind Speed: ${Math.round(weather.wind.speed)} m/s</p>
+    <p>Sunrise: ${new Date(weather.sys.sunrise * 1000).toLocaleTimeString()}</p>
+    <p>Sunset: ${new Date(weather.sys.sunset * 1000).toLocaleTimeString()}</p>
   `;
+  // TODO: Set icon depending on weather
+  // const currentWeatherIcon = document.getElementById('current-weather-icon');
+  // const weatherID = weather.weather[0].id;
+  // TODO: Min max in a day
+  // TODO: Sunrise sunset
+  // TODO: info about weather weather.description
+  // TODO: changeBackgroundcolor for default(weatherID);
 
+  const currentWeatherIcon = document.getElementById('current-weather-icon');
+  const weatherIconID = weather.weather[0].icon;
+
+  if (weatherIconID === '01d') {
+    currentWeatherIcon.innerHTML = `<img src="images/002-clear-sky-day.png" alt="Current Weather Icon">`;
+  } else if (weatherIconID === '01n') {
+    currentWeatherIcon.innerHTML = `<img src="images/003-clear-sky-night.png" alt="Current Weather Icon">`;
+  } else if (weatherIconID === '02d') {
+    currentWeatherIcon.innerHTML = `<img src="images/004-few-clouds-day.png" alt="Current Weather Icon">`;
+  } else if (weatherIconID === '02n') {
+    currentWeatherIcon.innerHTML = `<img src="images/005-few-clouds-night.png" alt="Current Weather Icon">`;
+  } else if (weatherIconID === '03d') {
+    currentWeatherIcon.innerHTML = `<img src="images/006-scattered-clouds.png" alt="Current Weather Icon">`;
+  } else if (weatherIconID === '03n') {
+    currentWeatherIcon.innerHTML = `<img src="images/006-scattered-clouds.png" alt="Current Weather Icon">`;
+  } else if (weatherIconID === '04d') {
+    currentWeatherIcon.innerHTML = `<img src="images/007-broken-clouds.png" alt="Current Weather Icon">`;
+  } else if (weatherIconID === '04n') {
+    currentWeatherIcon.innerHTML = `<img src="images/007-broken-clouds.png" alt="Current Weather Icon">`;
+  } else if (weatherIconID === '09d') {
+    currentWeatherIcon.innerHTML = `<img src="images/008-shower-rain.png" alt="Current Weather Icon">`;
+  } else if (weatherIconID === '09n') {
+    currentWeatherIcon.innerHTML = `<img src="images/008-shower-rain.png" alt="Current Weather Icon">`;
+  } else if (weatherIconID === '10d') {
+    currentWeatherIcon.innerHTML = `<img src="images/009-rain-day.png" alt="Current Weather Icon">`;
+  } else if (weatherIconID === '10n') {
+    currentWeatherIcon.innerHTML = `<img src="images/010-rain-night.png" alt="Current Weather Icon">`;
+  } else if (weatherIconID === '11d') {
+    currentWeatherIcon.innerHTML = `<img src="images/011-thunderstorm.png" alt="Current Weather Icon">`;
+  } else if (weatherIconID === '11n') {
+    currentWeatherIcon.innerHTML = `<img src="images/011-thunderstorm.png" alt="Current Weather Icon">`;
+  } else if (weatherIconID === '13d') {
+    currentWeatherIcon.innerHTML = `<img src="images/012-snow.png" alt="Current Weather Icon">`;
+  } else if (weatherIconID === '13n') {
+    currentWeatherIcon.innerHTML = `<img src="images/012-snow.png" alt="Current Weather Icon">`;
+  } else if (weatherIconID === '50d') {
+    currentWeatherIcon.innerHTML = `<img src="images/013-mist.png" alt="Current Weather Icon">`;
+  } else if (weatherIconID === '50n') {
+    currentWeatherIcon.innerHTML = `<img src="images/013-mist.png" alt="Current Weather Icon">`;
+  } else {
+    currentWeatherIcon.innerHTML = `<img src="images/001-meteorology.png" alt="Current Weather Icon">`;
+  }
+  // TODO: Unknown weatherID icon
+  
   // Display the current weather element
-  const currentWeather = document.getElementById('current-weather');
-  currentWeather.style.display = 'block';
+  currentWeatherTitle.style.display = 'block';
+
+  const currentWeatherContainer = document.getElementById('current-weather-container');
+  currentWeatherContainer.style.display = 'grid';
 }
 
 // Function to display forecast data in a table
