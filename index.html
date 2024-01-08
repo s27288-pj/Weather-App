@@ -3,80 +3,91 @@
 <head>
   <meta charset="UTF-8">
   <title>Weather App</title>
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="styles.css" id="CSS-source">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="crossorigin=""/>
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="crossorigin=""></script>
 </head>
 <body>
-  <div id="popup">
-    <p class="popup-text">Try mobile version of the website</p>
-    <p class="popup-text">Try the Konami Code!</p>
-    <button onclick="closePopup()">Close</button>
-  </div>
+  <div id="website-container">
+    <div id="popup">
+      <p class="popup-text">Try mobile version of the website</p>
+      <p class="popup-text">Try the Konami Code!</p>
+      <button onclick="closePopup()">Close</button>
+    </div>
 
-  <div id="header-container">
-    <div id="weather-app-icon">
-      <img src="images/001-meteorology.png" alt="Weather App Icon">
+    <div id="header-container">
+      <div id="weather-app-icon">
+        <img src="images/001-meteorology.png" alt="Weather App Icon">
+      </div>
+      <div id="weather-app-title">
+        <h1>Weather App</h1>
+      </div>
+      <div class="mode-switch">
+        <input type="range" min="1" max="3" value="2" class="slider" id="modeSlider">
+        <p>Mode: <span id="modeText">Default</span></p>
+      </div>
     </div>
-    <div id="weather-app-title">
-      <h1>Weather App</h1>
+    
+    <div id="search-container">
+      <div id="location-input-div">
+        <input type="text" id="location-input-field" placeholder="Enter location...">
+      </div>
+      <div id="search-button-div">
+        <button id="search-button">Search</button>
+      </div>    
     </div>
-    <div class="mode-switch">
-      <input type="range" min="1" max="3" value="2" class="slider" id="modeSlider">
-      <p>Mode: <span id="modeText">Default</span></p>
-    </div>
-  </div>
-  
-  <div id="search-container">
-    <div id="location-input-div">
-      <input type="text" id="location-input-field" placeholder="Enter location...">
-    </div>
-    <div id="search-button-div">
-      <button id="search-button">Search</button>
-    </div>    
-  </div>
-  
-  <div id="suggestions-list" style="display: none;"></div>
+    
+    <div id="suggestions-list" style="display: none;"></div>
 
-  <div id="current-weather-container" style="display: none;">
-    <div id="current-weather-title"></div>
-    <div id="current-weather-box">
-      <div id="current-weather"></div>
-      <div id="current-weather-icon"></div>
+    <div id="current-weather-container" style="display: none;">
+      <div id="current-weather-title"></div>
+      <div id="current-weather-box">
+        <div id="current-weather"></div>
+        <div id="current-weather-icon"></div>
+      </div>
     </div>
-  </div>
-  <div id="meme-container" style="display: none;">
-    <div id="meme-box"></div>
-  </div>
-  <div id="forecast-hourly-container" style="display: none;">
-    <div id="forecast-hourly-title">
-      <h2 id="forecast-hourly-title-h2">Hourly Forecast</h2>
+    <div id="meme-container" style="display: none;">
+      <div id="meme-box"></div>
     </div>
-    <div id="forecast-hourly-box"></div>
-  </div>
-  <div id="forecast-daily-container" style="display: none;">
-    <div id="forecast-daily-title">
-      <h2 id="forecast-daily-title-h2">Daily Forecast</h2>
+    <div id="forecast-hourly-container" style="display: none;">
+      <div id="forecast-hourly-title">
+        <h2 id="forecast-hourly-title-h2">Hourly Forecast</h2>
+      </div>
+      <div id="forecast-hourly-box"></div>
     </div>
-    <div id="forecast-daily-box"></div>
-  </div>
-  <div id="map-container" style="display: none;">
-    <div id="map-title">
-      <h2>Map</h2>
+    <div id="forecast-daily-container" style="display: none;">
+      <div id="forecast-daily-title">
+        <h2 id="forecast-daily-title-h2">Daily Forecast</h2>
+      </div>
+      <div id="forecast-daily-box"></div>
     </div>
-    <div id ="map-temperature">
-      <p>Temperature</p>
+    <div id="map-container" style="display: none;">
+      <div id="map-title">
+        <h2>Map</h2>
+      </div>
+      <div id ="map-temperature">
+        <p>Temperature</p>
+      </div>
+      <div id="map-precipitation">
+        <p>Precipitation</p>
+      </div>
+      <div id="map-wind">
+        <p>Wind</p>
+      </div>
+      <div class="map-box" id="map-box-temperature" style="display: none;"></div>
+      <div class="map-box" id="map-box-precipitation" style="display: none;"></div>
+      <div class="map-box" id="map-box-wind" style="display: none;"></div>
     </div>
-    <div id="map-precipitation">
-      <p>Precipitation</p>
+    <div id="footer-container">
+      <div id="footer-text">
+        <h3 id="footer-author">Created by Mateusz Lisewski</h3>
+        <p>Weather data provided by <a href="https://openweathermap.org/" target="_blank">OpenWeather</a></p>
+        <p>Icons made by <a href="https://www.freepik.com" target="_blank">Freepik</a> from <a href="https://www.flaticon.com/" target="_blank">www.flaticon.com</a></p>
+        <p>Map data © <a href="https://www.openstreetmap.org/" target="_blank">OpenStreetMap</a></p>
+        <p>Geocoding © <a href="https://www.mapbox.com/" target="_blank">Mapbox</a></p>
+      </div>
     </div>
-    <div id="map-wind">
-      <p>Wind</p>
-    </div>
-    <div class="map-box" id="map-box-temperature" style="display: none;"></div>
-    <div class="map-box" id="map-box-precipitation" style="display: none;"></div>
-    <div class="map-box" id="map-box-wind" style="display: none;"></div>
   </div>
   <script src="scripts.js"></script>
 </body>

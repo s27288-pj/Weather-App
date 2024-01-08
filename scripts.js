@@ -4,6 +4,19 @@
 // TODO: 
 
 // TODO: Change before commit
+
+function loadCSSBasedOnUserAgent() {
+  const userAgent = navigator.userAgent.toLowerCase();
+
+  if (userAgent.includes('android') || userAgent.includes('iphone') || userAgent.includes('ipad')) {
+    document.getElementById('CSS-source').href = 'mobile.css'; // Load mobile.css for mobile devices
+  } else {
+    document.getElementById('CSS-source').href = 'styles.css'; // Load default.css for other devices
+  }
+}
+
+loadCSSBasedOnUserAgent();
+
 const apiKey = 'e9a0824a1e90c45f262aa4a15de73a21';
 const mapboxToken = 'pk.eyJ1IjoiczI3Mjg4IiwiYSI6ImNscjI2cGZveTA5eGsyam1wd20zb2dodjAifQ.e3K5AHnJvxXHclYQCIcnmg';
 
@@ -96,8 +109,8 @@ async function selectLocation(coordinates, place_name) {
     mapBoxWind.style.display = 'block';
 
     displayCurrentWeather(weatherData, place_name);
-    displayForecastHourlyData(forecastHourlyData);
-    displayForecastDailyData(forecastDailyData);
+    displayForecastHourlyData(forecastHourlyData, weatherData);
+    displayForecastDailyData(forecastDailyData, weatherData);
     getTA2MapData(latitude, longitude);
     getPA0MapData(latitude, longitude);
     getWNDMapData(latitude, longitude);
@@ -222,6 +235,9 @@ function displayCurrentWeather(weather, place_name) {
   const currentWeatherTitle = document.getElementById('current-weather-title');
   currentWeatherTitle.innerHTML = `<h2>Current Weather in ${place_name}</h2>`;
 
+  const sunrise = new Date(weather.sys.sunrise * 1000 + weather.timezone * 1000 - 3600 * 1000).toLocaleTimeString();
+  const sunset = new Date(weather.sys.sunset * 1000 + weather.timezone * 1000 - 3600 * 1000).toLocaleTimeString();
+
   const currentWeatherElement = document.getElementById('current-weather');
   currentWeatherElement.innerHTML = `
     <p>Weather: ${capitalizeFirstLetter(weather.weather[0].description)}</p>
@@ -229,8 +245,8 @@ function displayCurrentWeather(weather, place_name) {
     <p>Feels Like: ${Math.round(weather.main.feels_like)}°C</p>
     <p>Humidity: ${Math.round(weather.main.humidity)}%</p>
     <p>Wind Speed: ${Math.round(weather.wind.speed)} m/s</p>
-    <p>Sunrise: ${new Date(weather.sys.sunrise * 1000).toLocaleTimeString()}</p>
-    <p>Sunset: ${new Date(weather.sys.sunset * 1000).toLocaleTimeString()}</p>
+    <p>Sunrise: ${sunrise}</p>
+    <p>Sunset: ${sunset}</p>
   `;
 
   const currentWeatherIcon = document.getElementById('current-weather-icon');
@@ -332,14 +348,15 @@ function displayCurrentWeather(weather, place_name) {
   
 }
 
-function displayForecastHourlyData(forecastHourly) {
+function displayForecastHourlyData(forecastHourly, weather) {
   const forecastHourlyDataElement = document.getElementById('forecast-hourly-box');
   forecastHourlyDataElement.innerHTML = '';
-  
-  forecastHourly.forEach(hour => {
-    const date = new Date(hour.dt * 1000); // Convert Unix timestamp to JavaScript date object
-    const time = date.toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' });
+  const weatherData = weather;
 
+  forecastHourly.forEach(hour => {
+    const date = new Date(hour.dt * 1000 + weatherData.timezone * 1000); // Convert Unix timestamp to JavaScript date object
+    const time = date.toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' });
+    
     const weather = hour.weather[0];
     const temperature = Math.round(hour.main.temp);
     const feelsLike = Math.round(hour.main.feels_like);
@@ -364,10 +381,11 @@ function displayForecastHourlyData(forecastHourly) {
 }
 
 // Function to display forecast daily data
-function displayForecastDailyData(forecastDaily) {
+function displayForecastDailyData(forecastDaily, weather) {
   const forecastDailyDataElement = document.getElementById('forecast-daily-box');
   forecastDailyDataElement.innerHTML = '';
-  
+  const weatherData = weather;
+
   forecastDaily.forEach(day => {
     const date = new Date(day.dt * 1000); // Convert Unix timestamp to JavaScript date object
     const dayOfWeek = date.toLocaleDateString('en-US', { weekday: 'long' });
@@ -375,8 +393,8 @@ function displayForecastDailyData(forecastDaily) {
     const temperatureDay = Math.round(day.temp.day);
     const temperatureNight = Math.round(day.temp.night);
     const humidity = Math.round(day.humidity);
-    const sunrise = new Date(day.sunrise * 1000).toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' });
-    const sunset = new Date(day.sunset * 1000).toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' });
+    const pressure = Math.round(day.pressure);
+    const speed = day.speed;
     const description = capitalizeFirstLetter(weather.description);
     const iconUrl = `http://openweathermap.org/img/wn/${weather.icon}.png`;
 
@@ -386,8 +404,8 @@ function displayForecastDailyData(forecastDaily) {
         <div class="forecast-daily-temperature-day"><p>Day: ${temperatureDay}°C</p></div>
         <div class="forecast-daily-temperature-night"><p>Night: ${temperatureNight}°C</p></div>
         <div class="forecast-daily-humidity"><p>Humidity: ${humidity}%</p></div>
-        <div class="forecast-daily-sunrise"><p>Sunrise: ${sunrise}</p></div>
-        <div class="forecast-daily-sunset"><p>Sunset: ${sunset}</p></div>
+        <div class="forecast-daily-pressure"><p>Pressure: ${pressure}hPa</p></div>
+        <div class="forecast-daily-wind"><p>Wind Speed: ${speed}m/s</p></div>
         <div class="forecast-daily-icon"><img src="${iconUrl}" alt="${description}"></div>
         <div class="forecast-daily-description"><p>${description}</p></div>        
       </div>
@@ -431,8 +449,8 @@ async function searchWeather() {
   mapBoxWind.style.display = 'block';
 
   displayCurrentWeather(weatherData, mapboxData.features[0].place_name);
-  displayForecastHourlyData(forecastHourlyData);
-  displayForecastDailyData(forecastDailyData);
+  displayForecastHourlyData(forecastHourlyData, weatherData);
+  displayForecastDailyData(forecastDailyData, weatherData);
   getTA2MapData(latitude, longitude);
   getPA0MapData(latitude, longitude);
   getWNDMapData(latitude, longitude);
