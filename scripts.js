@@ -10,6 +10,8 @@ const mapboxToken = 'pk.eyJ1IjoiczI3Mjg4IiwiYSI6ImNscjI2cGZveTA5eGsyam1wd20zb2do
 // const apiKey = process.env.REACT_APP_OPENWEATHERMAPAPI;
 // const mapboxToken = process.env.REACT_APP_MAPBOXTOKEN;
 
+localStorage.setItem('popupClosed', false);
+
 function capitalizeFirstLetter(string) {
   return string.charAt(0).toUpperCase() + string.slice(1);
 }
@@ -82,9 +84,15 @@ async function selectLocation(coordinates, place_name) {
   try {
     const weatherData = await getWeatherData(latitude, longitude);
     const forecastHourlyData = await getForecastHourlyData(latitude, longitude);
+    const forecastDailyData = await getForecastDailyData(latitude, longitude);
   
     displayCurrentWeather(weatherData, place_name);
     displayForecastHourlyData(forecastHourlyData);
+    displayForecastDailyData(forecastDailyData);
+    getTA2MapData(latitude, longitude);
+    getPA0MapData(latitude, longitude);
+    getWNDMapData(latitude, longitude);
+    displayMapData();
 
     // Set selected suggestion to the input box
     const locationInput = document.getElementById('location-input-field');
@@ -118,7 +126,7 @@ async function handleInput() {
   }
 }
 
-// Function to fetch weather data from OpenWeatherMap API
+// Functions to fetch weather data from OpenWeatherMap API
 async function getWeatherData(latitude, longitude) {
   const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=metric`);
   const data = await response.json();
@@ -129,6 +137,71 @@ async function getForecastHourlyData(latitude, longitude) {
   const response = await fetch(`https://pro.openweathermap.org/data/2.5/forecast/hourly?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=metric&cnt=24`);
   const data = await response.json();
   return data.list;
+}
+
+async function getForecastDailyData(latitude, longitude) {
+  const response = await fetch(`https://api.openweathermap.org/data/2.5/forecast/daily?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=metric&cnt=7`);
+  const data = await response.json();
+  return data.list;
+}
+
+async function getTA2MapData(latitude, longitude) {
+  const mapContainer = document.getElementById('map-box-temperature');
+  if (mapContainer && mapContainer._leaflet_id) {
+    mapContainer._leaflet_id = null;
+  }
+  const TA2Map = L.map('map-box-temperature').setView([latitude, longitude], 10);
+  
+  L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 18,
+    attribution: 'Map &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+}).addTo(TA2Map);
+
+  L.tileLayer('http://maps.openweathermap.org/maps/2.0/weather/{op}/{z}/{x}/{y}?appid={apiKey}&opacity=0.6&fill_bound=true', {
+    apiKey: apiKey,
+    maxZoom: 18,
+    attribution: 'Weather &copy; <a href="https://openweathermap.org">OpenWeatherMap</a>',
+    op: 'TA2',
+  }).addTo(TA2Map);
+}
+
+async function getPA0MapData(latitude, longitude) {
+  const mapContainer = document.getElementById('map-box-precipitation');
+  if (mapContainer && mapContainer._leaflet_id) {
+    mapContainer._leaflet_id = null;
+  }
+  const PA0Map = L.map('map-box-precipitation').setView([latitude, longitude], 10);
+  
+  L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 18,
+    attribution: 'Map &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+}).addTo(PA0Map);
+
+  L.tileLayer('http://maps.openweathermap.org/maps/2.0/weather/{op}/{z}/{x}/{y}?appid={apiKey}&opacity=0.6&fill_bound=true', {
+    apiKey: apiKey,
+    maxZoom: 18,
+    attribution: 'Weather &copy; <a href="https://openweathermap.org">OpenWeatherMap</a>',
+    op: 'PA0',
+  }).addTo(PA0Map);
+}
+async function getWNDMapData(latitude, longitude) {
+  const mapContainer = document.getElementById('map-box-wind');
+  if (mapContainer && mapContainer._leaflet_id) {
+    mapContainer._leaflet_id = null;
+  }
+  const WNDMap = L.map('map-box-wind').setView([latitude, longitude], 10);
+  
+  L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 18,
+    attribution: 'Map &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+}).addTo(WNDMap);
+
+  L.tileLayer('http://maps.openweathermap.org/maps/2.0/weather/{op}/{z}/{x}/{y}?appid={apiKey}&opacity=0.6&fill_bound=true', {
+    apiKey: apiKey,
+    maxZoom: 18,
+    attribution: 'Weather &copy; <a href="https://openweathermap.org">OpenWeatherMap</a>',
+    op: 'WND',
+  }).addTo(WNDMap);
 }
 
 // Function to display current weather and secrets
@@ -233,13 +306,17 @@ function displayCurrentWeather(weather, place_name) {
     memeBoxElement.innerHTML = `<img src="images/002-clear-sky-day.png" alt="Meme">`; // TODO: Change meme for clear weather
   }
 
+  // Display the Popup after 10 seconds
+  if (localStorage.getItem('popupClosed') === 'true') {
+    // Do nothing if popup has been closed before
+  } else {
+    setTimeout(displayPopupOnDesktop, 10000); // 10 seconds in milliseconds 
+  }
 
   // Display the current weather container
   const currentWeatherContainer = document.getElementById('current-weather-container');
   currentWeatherContainer.style.display = 'grid';
   
-  // Display the Popup after 10 seconds
-  setTimeout(displayPopupOnDesktop, 10000); // 10 seconds in milliseconds 
 }
 
 function displayForecastHourlyData(forecastHourly) {
@@ -273,14 +350,46 @@ function displayForecastHourlyData(forecastHourly) {
   forecastHourlyContainer.style.display = 'grid';
 }
 
-// Function to handle the toggle of forecast table visibility
-function toggleForecastTable() {
-  const forecastTable = document.getElementById('forecast-table');
-  if (forecastTable.style.display === 'none') {
-    forecastTable.style.display = 'table';
-  } else {
-    forecastTable.style.display = 'none';
-  }
+// Function to display forecast daily data
+function displayForecastDailyData(forecastDaily) {
+  const forecastDailyDataElement = document.getElementById('forecast-daily-box');
+  forecastDailyDataElement.innerHTML = '';
+  
+  forecastDaily.forEach(day => {
+    const date = new Date(day.dt * 1000); // Convert Unix timestamp to JavaScript date object
+    const dayOfWeek = date.toLocaleDateString('en-US', { weekday: 'long' });
+    const weather = day.weather[0];
+    const temperatureDay = Math.round(day.temp.day);
+    const temperatureNight = Math.round(day.temp.night);
+    const humidity = Math.round(day.humidity);
+    const sunrise = new Date(day.sunrise * 1000).toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' });
+    const sunset = new Date(day.sunset * 1000).toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' });
+    const description = capitalizeFirstLetter(weather.description);
+    const iconUrl = `http://openweathermap.org/img/wn/${weather.icon}.png`;
+
+    const forecastItem = `
+      <div class="forecast-daily-item">
+        <div class="forecast-daily-day"><p>${dayOfWeek}</p></div>
+        <div class="forecast-daily-temperature-day"><p>Day: ${temperatureDay}°C</p></div>
+        <div class="forecast-daily-temperature-night"><p>Night: ${temperatureNight}°C</p></div>
+        <div class="forecast-daily-humidity"><p>Humidity: ${humidity}%</p></div>
+        <div class="forecast-daily-sunrise"><p>Sunrise: ${sunrise}</p></div>
+        <div class="forecast-daily-sunset"><p>Sunset: ${sunset}</p></div>
+        <div class="forecast-daily-icon"><img src="${iconUrl}" alt="${description}"></div>
+        <div class="forecast-daily-description"><p>${description}</p></div>        
+      </div>
+    `;
+    forecastDailyDataElement.innerHTML += forecastItem;
+  });
+  // Display the forecast title and table
+  const forecastDailyContainer = document.getElementById('forecast-daily-container');
+  forecastDailyContainer.style.display = 'grid';
+}
+
+// Function to display map data
+function displayMapData() {
+  const mapDataElement = document.getElementById('map-container');
+  mapDataElement.style.display = 'grid';
 }
 
 // Function to handle the search and retrieve weather data
@@ -297,9 +406,15 @@ async function searchWeather() {
   
   const weatherData = await getWeatherData(`${latitude},${longitude}`);
   const forecastHourlyData = await getForecastHourlyData(`${latitude},${longitude}`);
+  const forecastDailyData = await getForecastDailyData(`${latitude},${longitude}`);
   
   displayCurrentWeather(weatherData, mapboxData.features[0].place_name);
   displayForecastHourlyData(forecastHourlyData);
+  displayForecastDailyData(forecastDailyData);
+  getTA2MapData(latitude, longitude);
+  getPA0MapData(latitude, longitude);
+  getWNDMapData(latitude, longitude);
+  displayMapData();
 }
 
 // Function to handle search when button is clicked or Enter is pressed
@@ -332,6 +447,7 @@ function clearInputField() {
 }
 
 function displayPopupOnDesktop() {
+  localStorage.setItem('popupClosed', false);
   const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
   if (!isMobile) {
     const popup = document.getElementById('popup');
@@ -342,6 +458,7 @@ function displayPopupOnDesktop() {
 // Function to close the popup
 function closePopup() {
   const popup = document.getElementById('popup');
+  localStorage.setItem('popupClosed', true);
   popup.style.display = 'none';
 }
 
@@ -382,6 +499,42 @@ locationInput.addEventListener('click', clearInputField);
 const weatherAppIcon = document.getElementById('weather-app-icon');
 weatherAppIcon.addEventListener('click', () => {
   location.reload();
+});
+
+const mapTemperature = document.getElementById('map-temperature');
+mapTemperature.addEventListener('click', () => {
+  const mapTitle = document.getElementById('map-title');
+  mapTitle.innerHTML = `<h2>Temperature Map</h2>`;
+  const mapBoxTemperature = document.getElementById('map-box-temperature');
+  mapBoxTemperature.style.display = 'block';
+  const mapBoxPrecipitation = document.getElementById('map-box-precipitation');
+  mapBoxPrecipitation.style.display = 'none';
+  const mapBoxWind = document.getElementById('map-box-wind');
+  mapBoxWind.style.display = 'none';
+});
+
+const mapPrecipitation = document.getElementById('map-precipitation');
+mapPrecipitation.addEventListener('click', () => {
+  const mapTitle = document.getElementById('map-title');
+  mapTitle.innerHTML = `<h2>Precipitation Map</h2>`;
+  const mapBoxTemperature = document.getElementById('map-box-temperature');
+  mapBoxTemperature.style.display = 'none';
+  const mapBoxPrecipitation = document.getElementById('map-box-precipitation');
+  mapBoxPrecipitation.style.display = 'block';
+  const mapBoxWind = document.getElementById('map-box-wind');
+  mapBoxWind.style.display = 'none';
+});
+
+const mapWind = document.getElementById('map-wind');
+mapWind.addEventListener('click', () => {
+  const mapTitle = document.getElementById('map-title');
+  mapTitle.innerHTML = `<h2>Wind Map</h2>`;
+  const mapBoxTemperature = document.getElementById('map-box-temperature');
+  mapBoxTemperature.style.display = 'none';
+  const mapBoxPrecipitation = document.getElementById('map-box-precipitation');
+  mapBoxPrecipitation.style.display = 'none';
+  const mapBoxWind = document.getElementById('map-box-wind');
+  mapBoxWind.style.display = 'block';
 });
 
 // Handle Enter key press

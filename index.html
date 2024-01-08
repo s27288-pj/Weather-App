@@ -5,6 +5,8 @@
   <title>Weather App</title>
   <link rel="stylesheet" href="styles.css">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="crossorigin=""/>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="crossorigin=""></script>
 </head>
 <body>
   <div id="popup">
@@ -52,6 +54,29 @@
       <h2 id="forecast-hourly-title-h2">Hourly Forecast</h2>
     </div>
     <div id="forecast-hourly-box"></div>
+  </div>
+  <div id="forecast-daily-container" style="display: none;">
+    <div id="forecast-daily-title">
+      <h2 id="forecast-daily-title-h2">Daily Forecast</h2>
+    </div>
+    <div id="forecast-daily-box"></div>
+  </div>
+  <div id="map-container" style="display: none;">
+    <div id="map-title">
+      <h2>Map</h2>
+    </div>
+    <div id ="map-temperature">
+      <p>Temperature</p>
+    </div>
+    <div id="map-precipitation">
+      <p>Precipitation</p>
+    </div>
+    <div id="map-wind">
+      <p>Wind</p>
+    </div>
+    <div class="map-box" id="map-box-temperature" style="display: none;"></div>
+    <div class="map-box" id="map-box-precipitation" style="display: none;"></div>
+    <div class="map-box" id="map-box-wind" style="display: none;"></div>
   </div>
   <script src="scripts.js"></script>
 </body>
