@@ -86,6 +86,15 @@ async function selectLocation(coordinates, place_name) {
     const forecastHourlyData = await getForecastHourlyData(latitude, longitude);
     const forecastDailyData = await getForecastDailyData(latitude, longitude);
   
+    const mapContainer = document.getElementById('map-container');
+    mapContainer.style.display = 'grid';
+    const mapBoxTemperature = document.getElementById('map-box-temperature');
+    mapBoxTemperature.style.display = 'block';
+    const mapBoxPrecipitation = document.getElementById('map-box-precipitation');
+    mapBoxPrecipitation.style.display = 'block';
+    const mapBoxWind = document.getElementById('map-box-wind');
+    mapBoxWind.style.display = 'block';
+
     displayCurrentWeather(weatherData, place_name);
     displayForecastHourlyData(forecastHourlyData);
     displayForecastDailyData(forecastDailyData);
@@ -408,6 +417,15 @@ async function searchWeather() {
   const forecastHourlyData = await getForecastHourlyData(`${latitude},${longitude}`);
   const forecastDailyData = await getForecastDailyData(`${latitude},${longitude}`);
   
+  const mapContainer = document.getElementById('map-container');
+  mapContainer.style.display = 'grid';
+  const mapBoxTemperature = document.getElementById('map-box-temperature');
+  mapBoxTemperature.style.display = 'block';
+  const mapBoxPrecipitation = document.getElementById('map-box-precipitation');
+  mapBoxPrecipitation.style.display = 'block';
+  const mapBoxWind = document.getElementById('map-box-wind');
+  mapBoxWind.style.display = 'block';
+
   displayCurrentWeather(weatherData, mapboxData.features[0].place_name);
   displayForecastHourlyData(forecastHourlyData);
   displayForecastDailyData(forecastDailyData);

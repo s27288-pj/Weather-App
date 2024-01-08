@@ -674,7 +674,7 @@
     color: var(--light-text-color);
     width: 100%;
     padding: 0px;
-    margin: 0px;
+    margin: 0px 0px 0px 10px;
     grid-column: 1;
     grid-row: 1;
     box-shadow: none;
@@ -692,7 +692,7 @@
     color: var(--dark-text-color);
     width: 100%;
     padding: 0px;
-    margin: 0px;
+    margin: 0px 0px 0px 10px;
     grid-column: 1;
     grid-row: 1;
     box-shadow: none;
