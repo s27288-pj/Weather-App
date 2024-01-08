@@ -31,39 +31,27 @@
       <input type="text" id="location-input-field" placeholder="Enter location...">
     </div>
     <div id="search-button-div">
-      <button id="search-button" onclick="searchWeatherOnClick()">Search</button>
+      <button id="search-button">Search</button>
     </div>    
   </div>
   
   <div id="suggestions-list" style="display: none;"></div>
 
   <div id="current-weather-container" style="display: none;">
-    <div id="current-weather-title" style="display: none;"></div>
+    <div id="current-weather-title"></div>
     <div id="current-weather-box">
       <div id="current-weather"></div>
       <div id="current-weather-icon"></div>
     </div>
-  </div>  
-  <div id="forecast-container" style="display: none;">
-    <div id="forecast-title" style="display: none;">
-      <h2 id="forecast-title-h2" style="display: none;">Forecast</h2>
+  </div>
+  <div id="meme-container" style="display: none;">
+    <div id="meme-box"></div>
+  </div>
+  <div id="forecast-hourly-container" style="display: none;">
+    <div id="forecast-hourly-title">
+      <h2 id="forecast-hourly-title-h2">Hourly Forecast</h2>
     </div>
-
-    <div id="forecast-table-container">
-      <table id="forecast-table" class="forecast-table" style="display: none;">
-        <thead>
-          <tr>
-            <th>Date</th>
-            <th>Temperature (°C)</th>
-            <th>Feels Like (°C)</th>
-            <th>Pressure (hPa)</th>
-            <th>Humidity (%)</th>
-          </tr>
-        </thead>
-        <tbody id="forecast-data">
-        </tbody>
-      </table>
-    </div>
+    <div id="forecast-hourly-box"></div>
   </div>
   <script src="scripts.js"></script>
 </body>

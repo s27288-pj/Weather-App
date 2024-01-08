@@ -81,10 +81,10 @@ async function selectLocation(coordinates, place_name) {
 
   try {
     const weatherData = await getWeatherData(latitude, longitude);
-    const forecastData = await getForecastData(latitude, longitude);
+    const forecastHourlyData = await getForecastHourlyData(latitude, longitude);
   
     displayCurrentWeather(weatherData, place_name);
-    displayForecastData(forecastData);
+    displayForecastHourlyData(forecastHourlyData);
 
     // Set selected suggestion to the input box
     const locationInput = document.getElementById('location-input-field');
@@ -125,14 +125,13 @@ async function getWeatherData(latitude, longitude) {
   return data;
 }
 
-// Function to fetch forecast data from OpenWeatherMap API
-async function getForecastData(latitude, longitude) {
-  const response = await fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=metric`);
+async function getForecastHourlyData(latitude, longitude) {
+  const response = await fetch(`https://pro.openweathermap.org/data/2.5/forecast/hourly?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=metric&cnt=24`);
   const data = await response.json();
-  return data;
+  return data.list;
 }
 
-// Function to display current weather
+// Function to display current weather and secrets
 function displayCurrentWeather(weather, place_name) {
   const currentWeatherTitle = document.getElementById('current-weather-title');
   currentWeatherTitle.innerHTML = `<h2>Current Weather in ${place_name}</h2>`;
@@ -147,97 +146,129 @@ function displayCurrentWeather(weather, place_name) {
     <p>Sunrise: ${new Date(weather.sys.sunrise * 1000).toLocaleTimeString()}</p>
     <p>Sunset: ${new Date(weather.sys.sunset * 1000).toLocaleTimeString()}</p>
   `;
-  // TODO: Set icon depending on weather
-  // const currentWeatherIcon = document.getElementById('current-weather-icon');
-  // const weatherID = weather.weather[0].id;
-  // TODO: Min max in a day
-  // TODO: Sunrise sunset
-  // TODO: info about weather weather.description
-  // TODO: changeBackgroundcolor for default(weatherID);
 
   const currentWeatherIcon = document.getElementById('current-weather-icon');
   const weatherIconID = weather.weather[0].icon;
 
   if (weatherIconID === '01d') {
     currentWeatherIcon.innerHTML = `<img src="images/002-clear-sky-day.png" alt="Current Weather Icon">`;
+    document.documentElement.style.setProperty('--default-background-color', '#ffe96e');
   } else if (weatherIconID === '01n') {
     currentWeatherIcon.innerHTML = `<img src="images/003-clear-sky-night.png" alt="Current Weather Icon">`;
+    document.documentElement.style.setProperty('--default-background-color', '#a0a0a0');
   } else if (weatherIconID === '02d') {
     currentWeatherIcon.innerHTML = `<img src="images/004-few-clouds-day.png" alt="Current Weather Icon">`;
+    document.documentElement.style.setProperty('--default-background-color', '#ffe96e');
   } else if (weatherIconID === '02n') {
     currentWeatherIcon.innerHTML = `<img src="images/005-few-clouds-night.png" alt="Current Weather Icon">`;
+    document.documentElement.style.setProperty('--default-background-color', '#a0a0a0');
   } else if (weatherIconID === '03d') {
     currentWeatherIcon.innerHTML = `<img src="images/006-scattered-clouds.png" alt="Current Weather Icon">`;
+    document.documentElement.style.setProperty('--default-background-color', '#ffe96e');
   } else if (weatherIconID === '03n') {
     currentWeatherIcon.innerHTML = `<img src="images/006-scattered-clouds.png" alt="Current Weather Icon">`;
+    document.documentElement.style.setProperty('--default-background-color', '#a0a0a0');
   } else if (weatherIconID === '04d') {
     currentWeatherIcon.innerHTML = `<img src="images/007-broken-clouds.png" alt="Current Weather Icon">`;
+    document.documentElement.style.setProperty('--default-background-color', '#a0a0a0');
   } else if (weatherIconID === '04n') {
     currentWeatherIcon.innerHTML = `<img src="images/007-broken-clouds.png" alt="Current Weather Icon">`;
+    document.documentElement.style.setProperty('--default-background-color', '#a0a0a0');
   } else if (weatherIconID === '09d') {
     currentWeatherIcon.innerHTML = `<img src="images/008-shower-rain.png" alt="Current Weather Icon">`;
+    document.documentElement.style.setProperty('--default-background-color', '#5cc3ff');
   } else if (weatherIconID === '09n') {
     currentWeatherIcon.innerHTML = `<img src="images/008-shower-rain.png" alt="Current Weather Icon">`;
+    document.documentElement.style.setProperty('--default-background-color', '#5cc3ff');
   } else if (weatherIconID === '10d') {
     currentWeatherIcon.innerHTML = `<img src="images/009-rain-day.png" alt="Current Weather Icon">`;
+    document.documentElement.style.setProperty('--default-background-color', '#6a74ff');
   } else if (weatherIconID === '10n') {
     currentWeatherIcon.innerHTML = `<img src="images/010-rain-night.png" alt="Current Weather Icon">`;
+    document.documentElement.style.setProperty('--default-background-color', '#6a74ff');
   } else if (weatherIconID === '11d') {
     currentWeatherIcon.innerHTML = `<img src="images/011-thunderstorm.png" alt="Current Weather Icon">`;
+    document.documentElement.style.setProperty('--default-background-color', '#363d9e');
   } else if (weatherIconID === '11n') {
     currentWeatherIcon.innerHTML = `<img src="images/011-thunderstorm.png" alt="Current Weather Icon">`;
+    document.documentElement.style.setProperty('--default-background-color', '#363d9e');
   } else if (weatherIconID === '13d') {
     currentWeatherIcon.innerHTML = `<img src="images/012-snow.png" alt="Current Weather Icon">`;
+    document.documentElement.style.setProperty('--default-background-color', '#f0f0f0');
   } else if (weatherIconID === '13n') {
     currentWeatherIcon.innerHTML = `<img src="images/012-snow.png" alt="Current Weather Icon">`;
+    document.documentElement.style.setProperty('--default-background-color', '#f0f0f0');
   } else if (weatherIconID === '50d') {
     currentWeatherIcon.innerHTML = `<img src="images/013-mist.png" alt="Current Weather Icon">`;
+    document.documentElement.style.setProperty('--default-background-color', '#a0a0a0');
   } else if (weatherIconID === '50n') {
     currentWeatherIcon.innerHTML = `<img src="images/013-mist.png" alt="Current Weather Icon">`;
+    document.documentElement.style.setProperty('--default-background-color', '#a0a0a0');
   } else {
     currentWeatherIcon.innerHTML = `<img src="images/001-meteorology.png" alt="Current Weather Icon">`;
   }
   // TODO: Unknown weatherID icon
-  
-  // Display the current weather element
-  currentWeatherTitle.style.display = 'block';
 
+  // Memes
+  const memeBoxElement = document.getElementById('meme-box');
+  if (Math.round(weather.main.temp) < -10) {
+    memeBoxElement.innerHTML = `<img src="images/memes/Jack-Nicholson-The-Shining-Snow.jpg" alt="Meme">`;
+  } else if (Math.round(weather.main.temp) >= -9 && weather.main.temp < 19) {
+    if (weather.weather[0].main === 'Rain' || weather.weather[0].main === 'Drizzle' || weather.weather[0].main === 'Thunderstorm') {
+      memeBoxElement.innerHTML = `<img src="images/memes/8d37f35ff717b6691ab1acf90dce6c83.jpg" alt="Meme">`;
+    } else if (weather.weather[0].main === 'Snow') {
+      memeBoxElement.innerHTML = `<img src="images/memes/Snowing.jpg" alt="Meme">`;
+    } else if (weather.weather[0].main === 'Clouds') {
+      memeBoxElement.innerHTML = `<img src="images/004-few-clouds-day.png" alt="Meme">`; // TODO: Change meme for clouds
+    } else if (weatherIconID === '50d') {
+      memeBoxElement.innerHTML = `<img src="images/memes/Mist.jpg" alt="Meme">`;
+    } else { // Clear weather
+      memeBoxElement.innerHTML = `<img src="images/002-clear-sky-day.png" alt="Meme">`; // TODO: Change meme for clear weather
+    }
+  } else if (Math.round(weather.main.temp) >= 20 && weather.main.temp <= 30) {
+    memeBoxElement.innerHTML = `<img src="images/memes/0_ZjYSm_q36J4KChdn.jpg" alt="Meme">`;
+  } else if (Math.round(weather.main.temp) > 30) { 
+    memeBoxElement.innerHTML = `<img src="images/memes/5d018c085cf9819634dee6572fb5dd79.jpg" alt="Meme">`;
+  } else {
+    memeBoxElement.innerHTML = `<img src="images/002-clear-sky-day.png" alt="Meme">`; // TODO: Change meme for clear weather
+  }
+
+
+  // Display the current weather container
   const currentWeatherContainer = document.getElementById('current-weather-container');
   currentWeatherContainer.style.display = 'grid';
+  
 }
 
-// Function to display forecast data in a table
-function displayForecastData(forecast) {
-  const forecastDataElement = document.getElementById('forecast-data');
-  forecastDataElement.innerHTML = '';
+function displayForecastHourlyData(forecastHourly) {
+  const forecastHourlyDataElement = document.getElementById('forecast-hourly-box');
+  forecastHourlyDataElement.innerHTML = '';
+  
+  forecastHourly.forEach(hour => {
+    const date = new Date(hour.dt * 1000); // Convert Unix timestamp to JavaScript date object
+    const time = date.toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' });
 
-  forecast.list.forEach(item => {
-    const dateTime = new Date(item.dt * 1000);
-    const day = dateTime.getDate().toString().padStart(2, '0'); // Get day (two digits)
-    const month = (dateTime.getMonth() + 1).toString().padStart(2, '0'); // Get month (two digits)
-    const year = dateTime.getFullYear(); // Get year
-    const hours = dateTime.getHours().toString().padStart(2, '0'); // Get hours (24-hour format)
-    const minutes = dateTime.getMinutes().toString().padStart(2, '0'); // Get minutes (two digits)
-    
-    const formattedDate = `${day}/${month}/${year}`;
-    const formattedTime = `${hours}:${minutes}`;
-    
-    const row = `
-      <tr>
-        <td>${formattedDate} ${formattedTime}</td>
-        <td>${item.main.temp}°C</td>
-        <td>${item.main.feels_like}°C</td>
-        <td>${item.main.pressure} hPa</td>
-        <td>${item.main.humidity}%</td>
-      </tr>
+    const weather = hour.weather[0];
+    const temperature = Math.round(hour.main.temp);
+    const feelsLike = Math.round(hour.main.feels_like);
+    const humidity = Math.round(hour.main.humidity);
+    const description = capitalizeFirstLetter(weather.description);
+    const iconUrl = `http://openweathermap.org/img/wn/${weather.icon}.png`;
+
+    const forecastItem = `
+      <div class="forecast-hourly-item">
+        <div class="forecast-hourly-time"><p>${time}</p></div>
+        <div class="forecast-hourly-icon"><img src="${iconUrl}" alt="${description}"></div>
+        <div class="forecast-hourly-temperature"><p>${temperature}/${feelsLike}°C</p></div>
+        <div class="forecast-hourly-humidity"><p>${humidity}%</p></div>
+        <div class="forecast-hourly-description"><p>${description}</p></div>
+      </div>
     `;
-    forecastDataElement.innerHTML += row;
+    forecastHourlyDataElement.innerHTML += forecastItem;
   });
   // Display the forecast title and table
-  const forecastTitle = document.getElementById('forecast-title');
-  const forecastTable = document.getElementById('forecast-table');
-  forecastTitle.style.display = 'block';
-  forecastTable.style.display = 'none';
+  const forecastHourlyContainer = document.getElementById('forecast-hourly-container');
+  forecastHourlyContainer.style.display = 'grid';
 }
 
 // Function to handle the toggle of forecast table visibility
@@ -263,10 +294,10 @@ async function searchWeather() {
   const longitude = coordinates[0];
   
   const weatherData = await getWeatherData(`${latitude},${longitude}`);
-  const forecastData = await getForecastData(`${latitude},${longitude}`);
+  const forecastHourlyData = await getForecastHourlyData(`${latitude},${longitude}`);
   
   displayCurrentWeather(weatherData, mapboxData.features[0].place_name);
-  displayForecastData(forecastData);
+  displayForecastHourlyData(forecastHourlyData);
 }
 
 // Function to handle search when button is clicked or Enter is pressed
@@ -327,7 +358,11 @@ function checkKonamiCode(event) {
 
     if (konamiCodeIndex === konamiCode.length) {
       // Konami code successfully entered, perform action (e.g., show an Easter egg)
-      alert('Konami code activated! 🎉');
+      
+      // Display the meme container
+      const memeContainer = document.getElementById('meme-container');
+      memeContainer.style.display = 'grid';
+      
       konamiCodeIndex = 0; // Reset index for next entry
     }
   } else {
@@ -344,9 +379,6 @@ searchButton.addEventListener('click', searchWeatherOnClick);
 
 const locationInput = document.getElementById('location-input-field');
 locationInput.addEventListener('click', clearInputField);
-
-const forecastTitle = document.getElementById('forecast-title');
-forecastTitle.addEventListener('click', toggleForecastTable);
 
 const weatherAppIcon = document.getElementById('weather-app-icon');
 weatherAppIcon.addEventListener('click', () => {
