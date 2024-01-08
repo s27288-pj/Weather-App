@@ -103,6 +103,10 @@ async function selectLocation(coordinates, place_name) {
     getWNDMapData(latitude, longitude);
     displayMapData();
 
+    mapBoxTemperature.style.display = 'none';
+    mapBoxPrecipitation.style.display = 'none';
+    mapBoxWind.style.display = 'none';
+
     // Set selected suggestion to the input box
     const locationInput = document.getElementById('location-input-field');
     locationInput.value = `${place_name}`;
@@ -433,6 +437,10 @@ async function searchWeather() {
   getPA0MapData(latitude, longitude);
   getWNDMapData(latitude, longitude);
   displayMapData();
+
+  mapBoxTemperature.style.display = 'none';
+  mapBoxPrecipitation.style.display = 'none';
+  mapBoxWind.style.display = 'none';
 }
 
 // Function to handle search when button is clicked or Enter is pressed
