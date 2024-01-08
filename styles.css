@@ -1,5 +1,6 @@
 :root {
   --default-background-color: #f0f0f0;
+  --default-background-color-body: #f0f0f0;
   --default-text-color: #333;
   --default-text-p-color: #666;
   --default-box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
@@ -202,7 +203,7 @@
     font-size: 11px;
     margin: 0;
     padding: 10px;
-    background-color: #f0f0f0;
+    background-color: var(--default-background-color-body);
     color: var(--default-text-color);
   }
   
@@ -668,6 +669,7 @@
     font-size: 13px;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     font-weight: bold;
+    color: var(--default-text-color);
   }
   .light-mode #current-weather {
     background-color:var(--light-background-color);
@@ -685,6 +687,7 @@
     font-size: 13px;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     font-weight: bold;
+    color: var(--light-text-color);
   }
   .dark-mode #current-weather {
     background-color:var(--dark-background-color);
@@ -702,6 +705,7 @@
     font-size: 13px;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     font-weight: bold;
+    color: var(--dark-text-color);
   }
 
   .default-mode #current-weather-icon {
@@ -929,7 +933,7 @@
     box-shadow:var(--default-box-shadow);
     border-radius: 8px;
     padding: 5px;
-    width: 100%; 
+    width: 100% - 10px; 
     overflow-x: auto;
     grid-column: 1;
     grid-row: 2;
@@ -944,7 +948,7 @@
     box-shadow:var(--light-box-shadow);
     border-radius: 8px;
     padding: 5px;
-    width: 100%; 
+    width: 100% - 10px; 
     overflow-x: auto;
     grid-column: 1;
     grid-row: 2;
@@ -959,7 +963,7 @@
     box-shadow:var(--dark-box-shadow);
     border-radius: 8px;
     padding: 5px;
-    width: 100%; 
+    width: 100% - 10px; 
     overflow-x: auto;
     grid-column: 1;
     grid-row: 2;
@@ -976,7 +980,6 @@
     border-radius: 8px;
     padding: 5px;
     width: 70px;
-    margin: 5px;
     text-align: center;
   }
   .default-mode .forecast-hourly-item p {
@@ -993,7 +996,6 @@
     border-radius: 8px;
     padding: 5px;
     width: 70px;
-    margin: 5px;
     text-align: center;
   }
   .light-mode .forecast-hourly-item p {
@@ -1010,7 +1012,6 @@
     border-radius: 8px;
     padding: 5px;
     width: 70px;
-    margin: 5px;
     text-align: center;
   }
   .dark-mode .forecast-hourly-item p {
@@ -1020,7 +1021,7 @@
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     font-weight: bold;
   }
-  
+
   
   .light-mode table {
     /* Table styles for light mode */
