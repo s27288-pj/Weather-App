@@ -404,8 +404,8 @@ function displayForecastDailyData(forecastDaily, weather) {
         <div class="forecast-daily-temperature-day"><p>Day: ${temperatureDay}°C</p></div>
         <div class="forecast-daily-temperature-night"><p>Night: ${temperatureNight}°C</p></div>
         <div class="forecast-daily-humidity"><p>Humidity: ${humidity}%</p></div>
-        <div class="forecast-daily-pressure"><p>Pressure: ${pressure}hPa</p></div>
-        <div class="forecast-daily-wind"><p>Wind Speed: ${speed}m/s</p></div>
+        <div class="forecast-daily-pressure"><p>P: ${pressure}hPa</p></div>
+        <div class="forecast-daily-wind"><p>Wind: ${speed}m/s</p></div>
         <div class="forecast-daily-icon"><img src="${iconUrl}" alt="${description}"></div>
         <div class="forecast-daily-description"><p>${description}</p></div>        
       </div>
