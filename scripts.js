@@ -337,11 +337,11 @@ function displayCurrentWeather(weather, place_name) {
     memeBoxElement.innerHTML = `<img src="images/002-clear-sky-day.png" alt="Meme">`; // TODO: Change meme for clear weather
   }
 
-  // Display the Popup after 10 seconds
+  // Display the Popup after 5 seconds
   if (localStorage.getItem('popupClosed') === 'true') {
     // Do nothing if popup has been closed before
   } else {
-    setTimeout(displayPopupOnDesktop, 10000); // 10 seconds in milliseconds 
+    setTimeout(displayPopupOnDesktop, 5000);
   }
 
   // Display the current weather container
@@ -364,7 +364,7 @@ function displayForecastHourlyData(forecastHourly, weather) {
     const feelsLike = Math.round(hour.main.feels_like);
     const humidity = Math.round(hour.main.humidity);
     const description = capitalizeFirstLetter(weather.description);
-    const iconUrl = `http://openweathermap.org/img/wn/${weather.icon}.png`;
+    const iconUrl = `images/icons/${weather.icon}.png`;
 
     const forecastItem = `
       <div class="forecast-hourly-item">
@@ -398,7 +398,7 @@ function displayForecastDailyData(forecastDaily, weather) {
     const pressure = Math.round(day.pressure);
     const speed = day.speed;
     const description = capitalizeFirstLetter(weather.description);
-    const iconUrl = `http://openweathermap.org/img/wn/${weather.icon}.png`;
+    const iconUrl = `images/icons/${weather.icon}.png`;
 
     const forecastItem = `
       <div class="forecast-daily-item">
@@ -498,13 +498,13 @@ function displayPopupOnDesktop() {
   if (!isMobile) {
     const popup = document.getElementById('popup');
     popup.style.display = 'block';
+    localStorage.setItem('popupClosed', true);
   }
 }
 
 // Function to close the popup
 function closePopup() {
   const popup = document.getElementById('popup');
-  localStorage.setItem('popupClosed', true);
   popup.style.display = 'none';
 }
 
