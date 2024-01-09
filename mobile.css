@@ -675,6 +675,7 @@ button {
 }
 .default-mode #current-weather-icon img {
   margin-top: 5px;
+  margin-right: 5px;
   height: 105px;
   width: 105px;
 }
@@ -688,6 +689,7 @@ button {
 }
 .light-mode #current-weather-icon img {
   margin-top: 5px;
+  margin-right: 5px;
   height: 105px;
   width: 105px;
 }
@@ -701,6 +703,7 @@ button {
 }
 .dark-mode #current-weather-icon img {
   margin-top: 5px;
+  margin-right: 5px;
   height: 105px;
   width: 105px;
 }
