@@ -240,13 +240,15 @@ function displayCurrentWeather(weather, place_name) {
 
   const currentWeatherElement = document.getElementById('current-weather');
   currentWeatherElement.innerHTML = `
-    <p>Weather: ${capitalizeFirstLetter(weather.weather[0].description)}</p>
-    <p>Temperature: ${Math.round(weather.main.temp)}°C</p>
-    <p>Feels Like: ${Math.round(weather.main.feels_like)}°C</p>
-    <p>Humidity: ${Math.round(weather.main.humidity)}%</p>
-    <p>Wind Speed: ${Math.round(weather.wind.speed)} m/s</p>
-    <p>Sunrise: ${sunrise}</p>
-    <p>Sunset: ${sunset}</p>
+    <p class="current-weather-description">Weather: ${capitalizeFirstLetter(weather.weather[0].description)}</p>
+    <p class="current-weather-temperature">Temperature: ${Math.round(weather.main.temp)}°C</p>
+    <p class="current-weather-feels-like">Feels Like: ${Math.round(weather.main.feels_like)}°C</p>
+    <p class="current-weather-humidity">Humidity: ${Math.round(weather.main.humidity)}%</p>
+    <p class="current-weather-pressure">Pressure: ${Math.round(weather.main.pressure)}hPa</p>
+    <p class="current-weather-visibility">Visibility: ${weather.visibility / 1000}km</p>
+    <p class="current-weather-wind">Wind Speed: ${weather.wind.speed}m/s</p>
+    <p class="current-weather-sunrise">Sunrise: ${sunrise}</p>
+    <p class="current-weather-"sunset>Sunset: ${sunset}</p>
   `;
 
   const currentWeatherIcon = document.getElementById('current-weather-icon');
