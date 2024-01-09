@@ -1,10 +1,3 @@
-// TODO: Current Weather background change depending on weather only on default mode, Light mode and Dark mode background doesn't change
-// TODO: Slider for Modes: Light, Default, Dark
-// TODO: Developer Mode for OpenWeatherMap API Key
-// TODO: 
-
-// TODO: Change before commit
-
 function loadCSSBasedOnUserAgent() {
   const userAgent = navigator.userAgent.toLowerCase();
 
@@ -260,6 +253,7 @@ function displayCurrentWeather(weather, place_name) {
   const currentWeatherIcon = document.getElementById('current-weather-icon');
   const weatherIconID = weather.weather[0].icon;
 
+  //TODO: Color changes
   if (weatherIconID === '01d') {
     currentWeatherIcon.innerHTML = `<img src="images/002-clear-sky-day.png" alt="Current Weather Icon">`;
     document.documentElement.style.setProperty('--default-background-color-body', '#ffe96e');
@@ -317,7 +311,6 @@ function displayCurrentWeather(weather, place_name) {
   } else {
     currentWeatherIcon.innerHTML = `<img src="images/001-meteorology.png" alt="Current Weather Icon">`;
   }
-  // TODO: Unknown weatherID icon
 
   // Memes
   const memeBoxElement = document.getElementById('meme-box');

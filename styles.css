@@ -2731,8 +2731,8 @@
   }
   .default-mode #current-weather-icon img {
     margin-top: 5px;
-    height: 105px;
-    width: 105px;
+    height: 95px;
+    width: 95px;
   }
   .light-mode #current-weather-icon {
     margin-top: 0px;
@@ -2744,8 +2744,8 @@
   }
   .light-mode #current-weather-icon img {
     margin-top: 5px;
-    height: 105px;
-    width: 105px;
+    height: 95px;
+    width: 95px;
   }
   .dark-mode #current-weather-icon {
     margin-top: 0px;
@@ -2757,11 +2757,10 @@
   }
   .dark-mode #current-weather-icon img {
     margin-top: 5px;
-    height: 105px;
-    width: 105px;
+    height: 95px;
+    width: 95px;
   }
 
-  /* TODO: center image */
   .default-mode #meme-container {
     background-color: var(--default-background-color);
     margin-top: 5px;
