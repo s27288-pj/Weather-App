@@ -1145,7 +1145,7 @@ button {
   height: 70px;
   text-align: left;
   display: grid;
-  grid-template-columns: 20% 30% 30% 20%; 
+  grid-template-columns: 25% 25% 30% 20%; 
   grid-template-rows: auto auto auto;
 }
 .light-mode .forecast-daily-item {
@@ -1158,7 +1158,7 @@ button {
   height: 70px;
   text-align: left;
   display: grid;
-  grid-template-columns: 20% 30% 30% 20%;
+  grid-template-columns: 25% 25% 30% 20%; 
   grid-template-rows: auto auto auto;
 }
 .dark-mode .forecast-daily-item {
@@ -1171,7 +1171,7 @@ button {
   height: 70px;
   text-align: left;
   display: grid;
-  grid-template-columns: 20% 30% 30% 20%;
+  grid-template-columns: 25% 25% 30% 20%; 
   grid-template-rows: auto auto auto;
 }
 

@@ -167,14 +167,14 @@ async function getTA2MapData(latitude, longitude) {
   if (mapContainer && mapContainer._leaflet_id) {
     mapContainer._leaflet_id = null;
   }
-  const TA2Map = L.map('map-box-temperature', {dragging: false, scrollWheelZoom: false}).setView([latitude, longitude], 10);
-  
-  L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+  const TA2Map = L.map('map-box-temperature', {dragging: false, scrollWheelZoom: false, touchZoom: false}).setView([latitude, longitude], 10);
+
+  const mapLayer =  L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 18,
     attribution: 'Map &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
 }).addTo(TA2Map);
 
-  L.tileLayer('http://maps.openweathermap.org/maps/2.0/weather/{op}/{z}/{x}/{y}?appid={apiKey}&opacity=0.6&fill_bound=true', {
+  const weatherLayer = L.tileLayer('http://maps.openweathermap.org/maps/2.0/weather/{op}/{z}/{x}/{y}?appid={apiKey}&opacity=0.6&fill_bound=true', {
     apiKey: apiKey,
     maxZoom: 18,
     attribution: 'Weather &copy; <a href="https://openweathermap.org">OpenWeatherMap</a>',
@@ -182,6 +182,15 @@ async function getTA2MapData(latitude, longitude) {
   }).addTo(TA2Map);
 
   TA2Map.zoomControl.remove();
+
+  // Remove all layers from TA2Map
+  TA2Map.eachLayer(function (layer) {
+    TA2Map.removeLayer(layer);
+  });
+
+  // Add the layers to TA2Map
+  mapLayer.addTo(TA2Map);
+  weatherLayer.addTo(TA2Map);
 }
 
 async function getPA0MapData(latitude, longitude) {
@@ -189,14 +198,14 @@ async function getPA0MapData(latitude, longitude) {
   if (mapContainer && mapContainer._leaflet_id) {
     mapContainer._leaflet_id = null;
   }
-  const PA0Map = L.map('map-box-precipitation', {dragging: false, scrollWheelZoom: false}).setView([latitude, longitude], 10);
+  const PA0Map = L.map('map-box-precipitation', {dragging: false, scrollWheelZoom: false, touchZoom: false}).setView([latitude, longitude], 10);
   
-  L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+  const mapLayer =  L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 18,
     attribution: 'Map &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
 }).addTo(PA0Map);
 
-  L.tileLayer('http://maps.openweathermap.org/maps/2.0/weather/{op}/{z}/{x}/{y}?appid={apiKey}&opacity=0.6&fill_bound=true', {
+  const weatherLayer = L.tileLayer('http://maps.openweathermap.org/maps/2.0/weather/{op}/{z}/{x}/{y}?appid={apiKey}&opacity=0.6&fill_bound=true', {
     apiKey: apiKey,
     maxZoom: 18,
     attribution: 'Weather &copy; <a href="https://openweathermap.org">OpenWeatherMap</a>',
@@ -204,20 +213,29 @@ async function getPA0MapData(latitude, longitude) {
   }).addTo(PA0Map);
 
   PA0Map.zoomControl.remove();
+
+  // Remove all layers from PA0Map
+  PA0Map.eachLayer(function (layer) {
+    PA0Map.removeLayer(layer);
+  });
+
+  // Add the layers to PA0Map
+  mapLayer.addTo(PA0Map);
+  weatherLayer.addTo(PA0Map);
 }
 async function getWNDMapData(latitude, longitude) {
   const mapContainer = document.getElementById('map-box-wind');
   if (mapContainer && mapContainer._leaflet_id) {
     mapContainer._leaflet_id = null;
   }
-  const WNDMap = L.map('map-box-wind', {dragging: false, scrollWheelZoom: false}).setView([latitude, longitude], 10);
+  const WNDMap = L.map('map-box-wind', {dragging: false, scrollWheelZoom: false, touchZoom: false}).setView([latitude, longitude], 10);
   
-  L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+  const mapLayer =  L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 18,
     attribution: 'Map &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
 }).addTo(WNDMap);
 
-  L.tileLayer('http://maps.openweathermap.org/maps/2.0/weather/{op}/{z}/{x}/{y}?appid={apiKey}&opacity=0.6&fill_bound=true', {
+  const weatherLayer = L.tileLayer('http://maps.openweathermap.org/maps/2.0/weather/{op}/{z}/{x}/{y}?appid={apiKey}&opacity=0.6&fill_bound=true', {
     apiKey: apiKey,
     maxZoom: 18,
     attribution: 'Weather &copy; <a href="https://openweathermap.org">OpenWeatherMap</a>',
@@ -225,6 +243,15 @@ async function getWNDMapData(latitude, longitude) {
   }).addTo(WNDMap);
 
   WNDMap.zoomControl.remove();
+
+  // Remove all layers from WNDMap
+  WNDMap.eachLayer(function (layer) {
+    WNDMap.removeLayer(layer);
+  });
+
+  // Add the layers to WNDMap
+  mapLayer.addTo(WNDMap);
+  weatherLayer.addTo(WNDMap);
 }
 
 // Function to display current weather and secrets
