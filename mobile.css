@@ -675,9 +675,8 @@ button {
 }
 .default-mode #current-weather-icon img {
   margin-top: 5px;
-  margin-right: 5px;
-  height: 105px;
-  width: 105px;
+  height: 95px;
+  width: 95px;
 }
 .light-mode #current-weather-icon {
   margin-top: 0px;
@@ -689,9 +688,8 @@ button {
 }
 .light-mode #current-weather-icon img {
   margin-top: 5px;
-  margin-right: 5px;
-  height: 105px;
-  width: 105px;
+  height: 95px;
+  width: 95px;
 }
 .dark-mode #current-weather-icon {
   margin-top: 0px;
@@ -703,12 +701,10 @@ button {
 }
 .dark-mode #current-weather-icon img {
   margin-top: 5px;
-  margin-right: 5px;
-  height: 105px;
-  width: 105px;
+  height: 95px;
+  width: 95px;
 }
 
-/* TODO: center image */
 .default-mode #meme-container {
   background-color: var(--default-background-color);
   margin-top: 5px;
@@ -1322,7 +1318,7 @@ button {
 .default-mode #map-container {
   width: 100% - 10px;
   margin-top: 5px;
-  margin-bottom: 0px;
+  margin-bottom: 5px;
   border-radius: 8px;
   display: grid;
   grid-template-columns: 30% 40% auto ;
@@ -1332,7 +1328,7 @@ button {
 .light-mode #map-container {
   max-width: 100%;
   margin-top: 5px;
-  margin-bottom: 0px;
+  margin-bottom: 5px;
   border-radius: 8px;
   display: grid;
   grid-template-columns: 30% 40% auto ;
@@ -1342,7 +1338,7 @@ button {
 .dark-mode #map-container {
   max-width: 100%;
   margin-top: 5px;
-  margin-bottom: 0px;
+  margin-bottom: 5px;
   border-radius: 8px;
   display: grid;
   grid-template-columns: 30% 40% auto ;
@@ -1731,4 +1727,3 @@ button {
   border-radius: 5px;
   display: block;
 }
-

@@ -1,5 +1,5 @@
 :root {
-  --default-background-color: #e0e0e0;
+  --default-background-color: #ececec;
   --default-background-color-body: #e2e2e2;
   --default-text-color: #333;
   --default-text-p-color: #666;
@@ -491,7 +491,7 @@
   .default-mode #current-weather-container {
     width: calc(100% - 20px);
     margin-top: 0px;
-    margin-bottom: 10px;
+    margin-bottom: 5px;
     margin-left: 10px;
     border-radius: 8px;
     display: grid;
@@ -504,7 +504,7 @@
   .light-mode #current-weather-container {
     width: calc(100% - 20px);
     margin-top: 0px;
-    margin-bottom: 10px;
+    margin-bottom: 5px;
     margin-left: 10px;
     border-radius: 8px;
     display: grid;
@@ -517,7 +517,7 @@
   .dark-mode #current-weather-container {
     width: calc(100% - 20px);
     margin-top: 0px;
-    margin-bottom: 10px;
+    margin-bottom: 5px;
     margin-left: 10px;
     border-radius: 8px;
     display: grid;
@@ -862,7 +862,7 @@
   .default-mode #meme-container {
     background-color: var(--default-background-color);
     margin-top: 5px;
-    margin-bottom: 0px;
+    margin-bottom: 5px;
     margin-left: 10px;
     width: calc(100% - 30px);
     border-radius: 8px;
@@ -878,7 +878,7 @@
   .light-mode #meme-container {
     background-color: var(--light-background-color);
     margin-top: 5px;
-    margin-bottom: 0px;
+    margin-bottom: 5px;
     margin-left: 10px;
     width: calc(100% - 30px);
     border-radius: 8px;
@@ -894,7 +894,7 @@
   .dark-mode #meme-container {
     background-color: var(--dark-background-color);
     margin-top: 5px;
-    margin-bottom: 0px;
+    margin-bottom: 5px;
     margin-left: 10px;
     width: calc(100% - 30px);
     border-radius: 8px;
@@ -921,8 +921,8 @@
     align-items: center;
     margin-top: 0px;
     margin-right: 0px;
-    max-width: 200px;
-    max-height: 200px;
+    max-width: 300px;
+    max-height: 300px;
     padding: 5px;
     color: var(--default-text-color);
   }
@@ -940,8 +940,8 @@
     align-items: center;
     margin-top: 0px;
     margin-right: 0px;
-    max-width: 200px;
-    max-height: 200px;
+    max-width: 300px;
+    max-height: 300px;
     padding: 5px;
     color: var(--light-text-color);
   }
@@ -959,8 +959,8 @@
     align-items: center;
     margin-top: 0px;
     margin-right: 0px;
-    max-width: 200px;
-    max-height: 200px;
+    max-width: 300px;
+    max-height: 300px;
     padding: 5px;
     color: var(--dark-text-color);
   }
@@ -1462,8 +1462,8 @@
     grid-row: 1;
   }
   .default-mode .forecast-daily-item .forecast-daily-icon img {
-    height: 50px;
-    width: 50px;
+    height: 75px;
+    width: 75px;
   }
   .default-mode .forecast-daily-item .forecast-daily-temperature-day {
     font-size: 13px;
@@ -1524,8 +1524,8 @@
     grid-row: 1;
   }
   .light-mode .forecast-daily-item .forecast-daily-icon img {
-    height: 50px;
-    width: 50px;
+    height: 75px;
+    width: 75px;
   }
   .light-mode .forecast-daily-item .forecast-daily-temperature-day {
     font-size: 13px;
@@ -1586,8 +1586,8 @@
     grid-row: 1;
   }
   .dark-mode .forecast-daily-item .forecast-daily-icon img {
-    height: 50px;
-    width: 50px;
+    height: 75px;
+    width: 75px;
   }
   .dark-mode .forecast-daily-item .forecast-daily-temperature-day {
     font-size: 13px;
@@ -1624,12 +1624,12 @@
   .default-mode #map-container {
     width: calc(100% - 20px);
     margin-top: 20px;
-    margin-bottom: 0px;
+    margin-bottom: 10px;
     margin-left: 10px;
     border-radius: 8px;
     display: grid;
-    grid-template-columns: auto;
-    grid-template-rows: auto;
+    grid-template-columns: 30% 40% auto ;
+    grid-template-rows: auto auto auto;
     gap: 5px 5px;
     grid-column: 1 / span 2;
     grid-row: 7;
@@ -1637,11 +1637,11 @@
   .light-mode #map-container {
     width: calc(100% - 20px);
     margin-top: 5px;
-    margin-bottom: 0px;
+    margin-bottom: 10px;
     border-radius: 8px;
     display: grid;
-    grid-template-columns: auto;
-    grid-template-rows: auto;
+    grid-template-columns: 30% 40% auto ;
+    grid-template-rows: auto auto auto;
     gap: 5px 5px;
     grid-column: 1 / span 2;
     grid-row: 7;
@@ -1649,11 +1649,11 @@
   .dark-mode #map-container {
     width: calc(100% - 20px);
     margin-top: 5px;
-    margin-bottom: 0px;
+    margin-bottom: 10px;
     border-radius: 8px;
     display: grid;
-    grid-template-columns: auto;
-    grid-template-rows: auto;
+    grid-template-columns: 30% 40% auto ;
+    grid-template-rows: auto auto auto;
     gap: 5px 5px;
     grid-column: 1 / span 2;
     grid-row: 7;
@@ -3374,7 +3374,7 @@
   .default-mode #map-container {
     width: 100% - 10px;
     margin-top: 5px;
-    margin-bottom: 0px;
+    margin-bottom: 5px;
     border-radius: 8px;
     display: grid;
     grid-template-columns: 30% 40% auto ;
@@ -3384,7 +3384,7 @@
   .light-mode #map-container {
     max-width: 100%;
     margin-top: 5px;
-    margin-bottom: 0px;
+    margin-bottom: 5px;
     border-radius: 8px;
     display: grid;
     grid-template-columns: 30% 40% auto ;
@@ -3394,7 +3394,7 @@
   .dark-mode #map-container {
     max-width: 100%;
     margin-top: 5px;
-    margin-bottom: 0px;
+    margin-bottom: 5px;
     border-radius: 8px;
     display: grid;
     grid-template-columns: 30% 40% auto ;

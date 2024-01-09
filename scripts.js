@@ -85,7 +85,7 @@ function displayLocationSuggestions(suggestions) {
 
 // Function to handle the selection of a location from suggestions
 async function selectLocation(coordinates, place_name) {
-  const [longitude, latitude] = coordinates; // Correctly extract latitude and longitude
+  const [longitude, latitude] = coordinates;
 
   try {
     const weatherData = await getWeatherData(latitude, longitude);
@@ -113,23 +113,20 @@ async function selectLocation(coordinates, place_name) {
     mapBoxPrecipitation.style.display = 'none';
     mapBoxWind.style.display = 'none';
 
-    // Set selected suggestion to the input box
+    // Update the input field value
     const locationInput = document.getElementById('location-input-field');
     locationInput.value = `${place_name}`;
 
-    // Clear suggestions list from the DOM
+    // Clear suggestions list
     const suggestionsList = document.getElementById('suggestions-list');
     suggestionsList.innerHTML = '';
     
-    // Hide the suggestions list
+    // Hide the suggestions list and move cursor out of the input field
     suggestionsList.style.display = 'none';
-
-    // Move cursor out of the input field
     locationInput.blur(); 
 
   } catch (error) {
     console.error('Error fetching weather data:', error);
-    // Handle error - for example, display an error message to the user
   }
 }
 
@@ -164,6 +161,7 @@ async function getForecastDailyData(latitude, longitude) {
   return data.list;
 }
 
+// Functions to fetch map data from OpenWeatherMap API add OpenStreetMap tiles and bind them to the map
 async function getTA2MapData(latitude, longitude) {
   const mapContainer = document.getElementById('map-box-temperature');
   if (mapContainer && mapContainer._leaflet_id) {
@@ -244,8 +242,8 @@ function displayCurrentWeather(weather, place_name) {
     <p class="current-weather-feels-like">Feels Like: ${Math.round(weather.main.feels_like)}°C</p>
     <p class="current-weather-humidity">Humidity: ${Math.round(weather.main.humidity)}%</p>
     <p class="current-weather-pressure">Pressure: ${Math.round(weather.main.pressure)}hPa</p>
-    <p class="current-weather-visibility">Visibility: ${weather.visibility / 1000}km</p>
-    <p class="current-weather-wind">Wind Speed: ${weather.wind.speed}m/s</p>
+    <p class="current-weather-visibility">Visibility: ${Math.round(weather.visibility / 1000 * 10) / 10}km</p>
+    <p class="current-weather-wind">Wind Speed: ${Math.round(weather.wind.speed * 10) / 10}m/s</p>
     <p class="current-weather-sunrise">Sunrise: ${sunrise}</p>
     <p class="current-weather-"sunset>Sunset: ${sunset}</p>
   `;
@@ -253,92 +251,92 @@ function displayCurrentWeather(weather, place_name) {
   const currentWeatherIcon = document.getElementById('current-weather-icon');
   const weatherIconID = weather.weather[0].icon;
 
-  //TODO: Color changes
   if (weatherIconID === '01d') {
-    currentWeatherIcon.innerHTML = `<img src="images/002-clear-sky-day.png" alt="Current Weather Icon">`;
-    document.documentElement.style.setProperty('--default-background-color-body', '#ffe96e');
+    currentWeatherIcon.innerHTML = `<img src="images/icons/01d.png" alt="Current Weather Icon">`;
+    document.documentElement.style.setProperty('--default-background-color-body', '#f5e7b9');
   } else if (weatherIconID === '01n') {
-    currentWeatherIcon.innerHTML = `<img src="images/003-clear-sky-night.png" alt="Current Weather Icon">`;
-    document.documentElement.style.setProperty('--default-background-color-body', '#a0a0a0');
+    currentWeatherIcon.innerHTML = `<img src="images/icons/01n.png" alt="Current Weather Icon">`;
+    document.documentElement.style.setProperty('--default-background-color-body', '#7791c2');
   } else if (weatherIconID === '02d') {
-    currentWeatherIcon.innerHTML = `<img src="images/004-few-clouds-day.png" alt="Current Weather Icon">`;
-    document.documentElement.style.setProperty('--default-background-color-body', '#ffe96e');
+    currentWeatherIcon.innerHTML = `<img src="images/icons/02d.png" alt="Current Weather Icon">`;
+    document.documentElement.style.setProperty('--default-background-color-body', '#a7d6df');
   } else if (weatherIconID === '02n') {
-    currentWeatherIcon.innerHTML = `<img src="images/005-few-clouds-night.png" alt="Current Weather Icon">`;
-    document.documentElement.style.setProperty('--default-background-color-body', '#a0a0a0');
+    currentWeatherIcon.innerHTML = `<img src="images/icons/02n.png" alt="Current Weather Icon">`;
+    document.documentElement.style.setProperty('--default-background-color-body', '#90a5cc');
   } else if (weatherIconID === '03d') {
-    currentWeatherIcon.innerHTML = `<img src="images/006-scattered-clouds.png" alt="Current Weather Icon">`;
-    document.documentElement.style.setProperty('--default-background-color-body', '#ffe96e');
+    currentWeatherIcon.innerHTML = `<img src="images/icons/03d.png" alt="Current Weather Icon">`;
+    document.documentElement.style.setProperty('--default-background-color-body', '#cccccc');
   } else if (weatherIconID === '03n') {
-    currentWeatherIcon.innerHTML = `<img src="images/006-scattered-clouds.png" alt="Current Weather Icon">`;
-    document.documentElement.style.setProperty('--default-background-color-body', '#a0a0a0');
+    currentWeatherIcon.innerHTML = `<img src="images/icons/03n.png" alt="Current Weather Icon">`;
+    document.documentElement.style.setProperty('--default-background-color-body', '#cccccc');
   } else if (weatherIconID === '04d') {
-    currentWeatherIcon.innerHTML = `<img src="images/007-broken-clouds.png" alt="Current Weather Icon">`;
-    document.documentElement.style.setProperty('--default-background-color-body', '#a0a0a0');
+    currentWeatherIcon.innerHTML = `<img src="images/icons/04d.png" alt="Current Weather Icon">`;
+    document.documentElement.style.setProperty('--default-background-color-body', '#a3a2a2');
   } else if (weatherIconID === '04n') {
-    currentWeatherIcon.innerHTML = `<img src="images/007-broken-clouds.png" alt="Current Weather Icon">`;
-    document.documentElement.style.setProperty('--default-background-color-body', '#a0a0a0');
+    currentWeatherIcon.innerHTML = `<img src="images/icons/04n.png" alt="Current Weather Icon">`;
+    document.documentElement.style.setProperty('--default-background-color-body', '#a3a2a2');
   } else if (weatherIconID === '09d') {
-    currentWeatherIcon.innerHTML = `<img src="images/008-shower-rain.png" alt="Current Weather Icon">`;
-    document.documentElement.style.setProperty('--default-background-color-body', '#5cc3ff');
+    currentWeatherIcon.innerHTML = `<img src="images/icons/09d.png" alt="Current Weather Icon">`;
+    document.documentElement.style.setProperty('--default-background-color-body', '#9bc7d4');
   } else if (weatherIconID === '09n') {
-    currentWeatherIcon.innerHTML = `<img src="images/008-shower-rain.png" alt="Current Weather Icon">`;
-    document.documentElement.style.setProperty('--default-background-color-body', '#5cc3ff');
+    currentWeatherIcon.innerHTML = `<img src="images/icons/09n.png" alt="Current Weather Icon">`;
+    document.documentElement.style.setProperty('--default-background-color-body', '#9bc7d4');
   } else if (weatherIconID === '10d') {
-    currentWeatherIcon.innerHTML = `<img src="images/009-rain-day.png" alt="Current Weather Icon">`;
-    document.documentElement.style.setProperty('--default-background-color-body', '#6a74ff');
+    currentWeatherIcon.innerHTML = `<img src="images/icons/10d.png" alt="Current Weather Icon">`;
+    document.documentElement.style.setProperty('--default-background-color-body', '#72afc2');
   } else if (weatherIconID === '10n') {
-    currentWeatherIcon.innerHTML = `<img src="images/010-rain-night.png" alt="Current Weather Icon">`;
-    document.documentElement.style.setProperty('--default-background-color-body', '#6a74ff');
+    currentWeatherIcon.innerHTML = `<img src="images/icons/10n.png" alt="Current Weather Icon">`;
+    document.documentElement.style.setProperty('--default-background-color-body', '#72afc2');
   } else if (weatherIconID === '11d') {
-    currentWeatherIcon.innerHTML = `<img src="images/011-thunderstorm.png" alt="Current Weather Icon">`;
-    document.documentElement.style.setProperty('--default-background-color-body', '#363d9e');
+    currentWeatherIcon.innerHTML = `<img src="images/icons/11d.png" alt="Current Weather Icon">`;
+    document.documentElement.style.setProperty('--default-background-color-body', '#787b9b');
   } else if (weatherIconID === '11n') {
-    currentWeatherIcon.innerHTML = `<img src="images/011-thunderstorm.png" alt="Current Weather Icon">`;
-    document.documentElement.style.setProperty('--default-background-color-body', '#363d9e');
+    currentWeatherIcon.innerHTML = `<img src="images/icons/11n.png" alt="Current Weather Icon">`;
+    document.documentElement.style.setProperty('--default-background-color-body', '#787b9b');
   } else if (weatherIconID === '13d') {
-    currentWeatherIcon.innerHTML = `<img src="images/012-snow.png" alt="Current Weather Icon">`;
-    document.documentElement.style.setProperty('--default-background-color-body', '#f0f0f0');
+    currentWeatherIcon.innerHTML = `<img src="images/icons/13d.png" alt="Current Weather Icon">`;
+    document.documentElement.style.setProperty('--default-background-color-body', '#c0fdff');
   } else if (weatherIconID === '13n') {
-    currentWeatherIcon.innerHTML = `<img src="images/012-snow.png" alt="Current Weather Icon">`;
-    document.documentElement.style.setProperty('--default-background-color-body', '#f0f0f0');
+    currentWeatherIcon.innerHTML = `<img src="images/icons/13n.png" alt="Current Weather Icon">`;
+    document.documentElement.style.setProperty('--default-background-color-body', '#c0fdff');
   } else if (weatherIconID === '50d') {
-    currentWeatherIcon.innerHTML = `<img src="images/013-mist.png" alt="Current Weather Icon">`;
-    document.documentElement.style.setProperty('--default-background-color-body', '#a0a0a0');
+    currentWeatherIcon.innerHTML = `<img src="images/icons/50d.png" alt="Current Weather Icon">`;
+    document.documentElement.style.setProperty('--default-background-color-body', '#f4ffff');
   } else if (weatherIconID === '50n') {
-    currentWeatherIcon.innerHTML = `<img src="images/013-mist.png" alt="Current Weather Icon">`;
-    document.documentElement.style.setProperty('--default-background-color-body', '#a0a0a0');
+    currentWeatherIcon.innerHTML = `<img src="images/icons/50n.png" alt="Current Weather Icon">`;
+    document.documentElement.style.setProperty('--default-background-color-body', '#f4ffff');
   } else {
     currentWeatherIcon.innerHTML = `<img src="images/001-meteorology.png" alt="Current Weather Icon">`;
   }
 
   // Memes
   const memeBoxElement = document.getElementById('meme-box');
-  if (Math.round(weather.main.temp) < -10) {
+  if (Math.round(weather.main.temp) <= -10) {
     memeBoxElement.innerHTML = `<img src="images/memes/Jack-Nicholson-The-Shining-Snow.jpg" alt="Meme">`;
+  } else if (Math.round(weather.main.temp) >= 20 && weather.main.temp <= 25) {
+    memeBoxElement.innerHTML = `<img src="images/memes/0_ZjYSm_q36J4KChdn.jpg" alt="Meme">`;
+  } else if (Math.round(weather.main.temp) > 25 && weather.main.temp <= 30) {
+    memeBoxElement.innerHTML = `<img src="images/memes/5d018c085cf9819634dee6572fb5dd79.jpg" alt="Meme">`;
+  } else if (Math.round(weather.main.temp) > 30) { 
+    memeBoxElement.innerHTML = `<img src="images/memes/Heat_wave.jpg" alt="Meme">`;
   } else if (Math.round(weather.main.temp) >= -9 && weather.main.temp < 19) {
     if (weather.weather[0].main === 'Rain' || weather.weather[0].main === 'Drizzle' || weather.weather[0].main === 'Thunderstorm') {
       memeBoxElement.innerHTML = `<img src="images/memes/8d37f35ff717b6691ab1acf90dce6c83.jpg" alt="Meme">`;
     } else if (weather.weather[0].main === 'Snow') {
       memeBoxElement.innerHTML = `<img src="images/memes/Snowing.jpg" alt="Meme">`;
     } else if (weather.weather[0].main === 'Clouds') {
-      memeBoxElement.innerHTML = `<img src="images/004-few-clouds-day.png" alt="Meme">`; // TODO: Change meme for clouds
+      memeBoxElement.innerHTML = `<img src="images/memes/Clouds.jpg" alt="Meme">`; 
     } else if (weatherIconID === '50d') {
       memeBoxElement.innerHTML = `<img src="images/memes/Mist.jpg" alt="Meme">`;
     } else { // Clear weather
-      memeBoxElement.innerHTML = `<img src="images/002-clear-sky-day.png" alt="Meme">`; // TODO: Change meme for clear weather
+      memeBoxElement.innerHTML = `<img src="images/memes/bbd.gif" alt="Meme">`;
     }
-  } else if (Math.round(weather.main.temp) >= 20 && weather.main.temp <= 30) {
-    memeBoxElement.innerHTML = `<img src="images/memes/0_ZjYSm_q36J4KChdn.jpg" alt="Meme">`;
-  } else if (Math.round(weather.main.temp) > 30) { 
-    memeBoxElement.innerHTML = `<img src="images/memes/5d018c085cf9819634dee6572fb5dd79.jpg" alt="Meme">`;
   } else {
-    memeBoxElement.innerHTML = `<img src="images/002-clear-sky-day.png" alt="Meme">`; // TODO: Change meme for clear weather
+    memeBoxElement.innerHTML = `<img src="images/memes/bbd.gif" alt="Meme">`; 
   }
 
-  // Display the Popup after 5 seconds
+  // Display the popup if it hasn't been closed
   if (localStorage.getItem('popupClosed') === 'true') {
-    // Do nothing if popup has been closed before
   } else {
     setTimeout(displayPopupOnDesktop, 5000);
   }
@@ -349,6 +347,7 @@ function displayCurrentWeather(weather, place_name) {
   
 }
 
+// Function to display forecast hourly data
 function displayForecastHourlyData(forecastHourly, weather) {
   const forecastHourlyDataElement = document.getElementById('forecast-hourly-box');
   forecastHourlyDataElement.innerHTML = '';
@@ -395,7 +394,7 @@ function displayForecastDailyData(forecastDaily, weather) {
     const temperatureNight = Math.round(day.temp.night);
     const humidity = Math.round(day.humidity);
     const pressure = Math.round(day.pressure);
-    const speed = day.speed;
+    const speed = Math.round(day.speed * 10) / 10;
     const description = capitalizeFirstLetter(weather.description);
     const iconUrl = `images/icons/${weather.icon}.png`;
 
@@ -478,7 +477,6 @@ function searchWeatherOnClick() {
       })
       .catch(error => {
         console.error('Error fetching location suggestions:', error);
-        // Handle error - for example, display an error message to the user
       });
   }
   else {
@@ -486,11 +484,13 @@ function searchWeatherOnClick() {
   }
 }
 
+// Function to clear the input field
 function clearInputField() {
   const locationInput = document.getElementById('location-input-field');
-  locationInput.value = ''; // Clear the input field value
+  locationInput.value = '';
 }
 
+// Function to display the popup on desktop
 function displayPopupOnDesktop() {
   localStorage.setItem('popupClosed', false);
   const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
@@ -507,6 +507,7 @@ function closePopup() {
   popup.style.display = 'none';
 }
 
+// Function to display the meme container
 const konamiCode = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
 let konamiCodeIndex = 0;
 
@@ -518,20 +519,19 @@ function checkKonamiCode(event) {
     konamiCodeIndex++;
 
     if (konamiCodeIndex === konamiCode.length) {
-      // Konami code successfully entered, perform action (e.g., show an Easter egg)
       
       // Display the meme container
       const memeContainer = document.getElementById('meme-container');
       memeContainer.style.display = 'grid';
       
-      konamiCodeIndex = 0; // Reset index for next entry
+      konamiCodeIndex = 0;
     }
   } else {
-    konamiCodeIndex = 0; // Reset index if wrong key is pressed
+    konamiCodeIndex = 0;
   }
 }
 
-// Attach an event listener to the input field for real-time suggestions
+// Attach an event listener to the input field for real-time suggestions, search button for search, and location input for clearing the input field
 const inputField = document.getElementById('location-input-field');
 inputField.addEventListener('input', handleInput);
 
@@ -541,11 +541,13 @@ searchButton.addEventListener('click', searchWeatherOnClick);
 const locationInput = document.getElementById('location-input-field');
 locationInput.addEventListener('click', clearInputField);
 
+// Reload the page when the weather app icon is clicked
 const weatherAppIcon = document.getElementById('weather-app-icon');
 weatherAppIcon.addEventListener('click', () => {
   location.reload();
 });
 
+// Function to displat the map data
 const mapTemperature = document.getElementById('map-temperature');
 mapTemperature.addEventListener('click', () => {
   const mapTitle = document.getElementById('map-title');
@@ -556,6 +558,7 @@ mapTemperature.addEventListener('click', () => {
   mapBoxPrecipitation.style.display = 'none';
   const mapBoxWind = document.getElementById('map-box-wind');
   mapBoxWind.style.display = 'none';
+  window.scrollTo(0, document.body.scrollHeight);
 });
 
 const mapPrecipitation = document.getElementById('map-precipitation');
@@ -568,6 +571,7 @@ mapPrecipitation.addEventListener('click', () => {
   mapBoxPrecipitation.style.display = 'block';
   const mapBoxWind = document.getElementById('map-box-wind');
   mapBoxWind.style.display = 'none';
+  window.scrollTo(0, document.body.scrollHeight);
 });
 
 const mapWind = document.getElementById('map-wind');
@@ -580,9 +584,10 @@ mapWind.addEventListener('click', () => {
   mapBoxPrecipitation.style.display = 'none';
   const mapBoxWind = document.getElementById('map-box-wind');
   mapBoxWind.style.display = 'block';
+  window.scrollTo(0, document.body.scrollHeight);
 });
 
-// Handle Enter key press
+// Handle Enter key press in input field
 inputField.addEventListener('keypress', function(event) {
   if (event.key === 'Enter') {
     searchWeatherOnClick();
@@ -592,7 +597,7 @@ inputField.addEventListener('keypress', function(event) {
 // Event listener for key presses
 document.addEventListener('keydown', function(event) {
   if (event.key === 'Escape') {
-    konamiCodeIndex = 0; // Reset index if Escape key is pressed
+    konamiCodeIndex = 0;
   } else {
     checkKonamiCode(event);
   }
@@ -601,7 +606,6 @@ document.addEventListener('keydown', function(event) {
 // Event listener for mode slider change
 modeSlider.addEventListener('input', () => {
   let mode = 'Default';
-
   switch (parseInt(modeSlider.value)) {
     case 1:
       mode = 'Light';
@@ -615,6 +619,5 @@ modeSlider.addEventListener('input', () => {
     default:
       break;
   }
-
   updateMode(mode);
 });
