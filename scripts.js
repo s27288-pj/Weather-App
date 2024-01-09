@@ -176,7 +176,7 @@ async function getTA2MapData(latitude, longitude) {
   if (mapContainer && mapContainer._leaflet_id) {
     mapContainer._leaflet_id = null;
   }
-  const TA2Map = L.map('map-box-temperature').setView([latitude, longitude], 10);
+  const TA2Map = L.map('map-box-temperature', {dragging: false, scrollWheelZoom: false}).setView([latitude, longitude], 10);
   
   L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 18,
@@ -189,6 +189,8 @@ async function getTA2MapData(latitude, longitude) {
     attribution: 'Weather &copy; <a href="https://openweathermap.org">OpenWeatherMap</a>',
     op: 'TA2',
   }).addTo(TA2Map);
+
+  TA2Map.zoomControl.remove();
 }
 
 async function getPA0MapData(latitude, longitude) {
@@ -196,7 +198,7 @@ async function getPA0MapData(latitude, longitude) {
   if (mapContainer && mapContainer._leaflet_id) {
     mapContainer._leaflet_id = null;
   }
-  const PA0Map = L.map('map-box-precipitation').setView([latitude, longitude], 10);
+  const PA0Map = L.map('map-box-precipitation', {dragging: false, scrollWheelZoom: false}).setView([latitude, longitude], 10);
   
   L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 18,
@@ -209,13 +211,15 @@ async function getPA0MapData(latitude, longitude) {
     attribution: 'Weather &copy; <a href="https://openweathermap.org">OpenWeatherMap</a>',
     op: 'PA0',
   }).addTo(PA0Map);
+
+  PA0Map.zoomControl.remove();
 }
 async function getWNDMapData(latitude, longitude) {
   const mapContainer = document.getElementById('map-box-wind');
   if (mapContainer && mapContainer._leaflet_id) {
     mapContainer._leaflet_id = null;
   }
-  const WNDMap = L.map('map-box-wind').setView([latitude, longitude], 10);
+  const WNDMap = L.map('map-box-wind', {dragging: false, scrollWheelZoom: false}).setView([latitude, longitude], 10);
   
   L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 18,
@@ -228,6 +232,8 @@ async function getWNDMapData(latitude, longitude) {
     attribution: 'Weather &copy; <a href="https://openweathermap.org">OpenWeatherMap</a>',
     op: 'WND',
   }).addTo(WNDMap);
+
+  WNDMap.zoomControl.remove();
 }
 
 // Function to display current weather and secrets
