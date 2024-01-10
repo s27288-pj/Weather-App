@@ -111,9 +111,9 @@ async function selectLocation(coordinates, place_name) {
 
     const mapTitle = document.getElementById('map-title');
     mapTitle.innerHTML = `<h2>Temperature Map</h2>`;
+    mapBoxPrecipitation.style.display = 'block';
+    mapBoxWind.style.display = 'block';
     mapBoxTemperature.style.display = 'block';
-    mapBoxPrecipitation.style.display = 'none';
-    mapBoxWind.style.display = 'none';
 
     // Update the input field value
     const locationInput = document.getElementById('location-input-field');
