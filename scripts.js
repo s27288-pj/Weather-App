@@ -180,20 +180,18 @@ async function getTA2MapData(latitude, longitude) {
     op: 'TA2',
   })
 
-  TA2Map.zoomControl.remove();
-
   // Add the layers to TA2Map
   mapLayer.addTo(TA2Map);
   weatherLayer.addTo(TA2Map);
 }
 
-async function getPA0MapData(latitude, longitude) {
+async function getPR0MapData(latitude, longitude) {
   const mapContainer = document.getElementById('map-box-precipitation');
   if (mapContainer && mapContainer._leaflet_id) {
     mapContainer._leaflet_id = null;
   }
 
-  const PA0Map = L.map('map-box-precipitation', {dragging: false, scrollWheelZoom: false, touchZoom: false}).setView([latitude, longitude], 10);
+  const PR0Map = L.map('map-box-precipitation', {dragging: false, scrollWheelZoom: false, touchZoom: false}).setView([latitude, longitude], 7);
   
   const mapLayer =  L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 18,
@@ -204,14 +202,12 @@ async function getPA0MapData(latitude, longitude) {
     apiKey: apiKey,
     maxZoom: 18,
     attribution: 'Weather &copy; <a href="https://openweathermap.org">OpenWeatherMap</a>',
-    op: 'PA0',
+    op: 'PR0',
   })
 
-  PA0Map.zoomControl.remove();
-
-  // Add the layers to PA0Map
-  mapLayer.addTo(PA0Map);
-  weatherLayer.addTo(PA0Map);
+  // Add the layers to PR0Map
+  mapLayer.addTo(PR0Map);
+  weatherLayer.addTo(PR0Map);
 }
 async function getWNDMapData(latitude, longitude) {
   const mapContainer = document.getElementById('map-box-wind');
@@ -232,8 +228,6 @@ async function getWNDMapData(latitude, longitude) {
     attribution: 'Weather &copy; <a href="https://openweathermap.org">OpenWeatherMap</a>',
     op: 'WND',
   })
-
-  WNDMap.zoomControl.remove();
 
   // Add the layers to WNDMap
   mapLayer.addTo(WNDMap);
@@ -546,7 +540,7 @@ mapPrecipitation.addEventListener('click', () => {
   mapBoxPrecipitation.style.display = 'block';
   const mapBoxWind = document.getElementById('map-box-wind');
   mapBoxWind.style.display = 'none';
-  getPA0MapData(latitude, longitude);
+  getPR0MapData(latitude, longitude);
   window.scrollTo(0, document.body.scrollHeight);
 });
 

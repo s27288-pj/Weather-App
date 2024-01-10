@@ -1735,6 +1735,10 @@
     font-size: 13px;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
   }
+  .default-mode #map-temperature:hover {
+    color: var(--default-hover-color);
+    cursor: pointer;
+  }
 
   .light-mode #map-temperature {
     background-color:var(--light-background-color);
@@ -1752,6 +1756,10 @@
     padding: 0px;
     font-size: 13px;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  }
+  .light-mode #map-temperature:hover {
+    color: var(--light-hover-color);
+    cursor: pointer;
   }
 
   .dark-mode #map-temperature {
@@ -1771,6 +1779,10 @@
     font-size: 13px;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
   }
+  .dark-mode #map-temperature:hover {
+    color: var(--dark-hover-color);
+    cursor: pointer;
+  }
 
   .default-mode #map-precipitation {
     background-color:var(--default-background-color);
@@ -1788,6 +1800,10 @@
     padding: 0px;
     font-size: 13px;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  }
+  .default-mode #map-precipitation:hover {
+    color: var(--default-hover-color);
+    cursor: pointer;
   }
 
   .light-mode #map-precipitation {
@@ -1807,6 +1823,10 @@
     font-size: 13px;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
   }
+  .light-mode #map-precipitation:hover {
+    color: var(--light-hover-color);
+    cursor: pointer;
+  }
 
   .dark-mode #map-precipitation {
     background-color:var(--dark-background-color);
@@ -1824,6 +1844,10 @@
     padding: 0px;
     font-size: 13px;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  }
+  .dark-mode #map-precipitation:hover {
+    color: var(--dark-hover-color);
+    cursor: pointer;
   }
 
   .default-mode #map-wind {
@@ -1843,6 +1867,10 @@
     font-size: 13px;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
   }
+  .default-mode #map-wind:hover {
+    color: var(--default-hover-color);
+    cursor: pointer;
+  }
 
   .light-mode #map-wind {
     background-color:var(--light-background-color);
@@ -1861,6 +1889,10 @@
     font-size: 13px;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
   }
+  .light-mode #map-wind:hover {
+    color: var(--light-hover-color);
+    cursor: pointer;
+  }
 
   .dark-mode #map-wind {
     background-color:var(--dark-background-color);
@@ -1878,6 +1910,10 @@
     padding: 0px;
     font-size: 13px;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  }
+  .dark-mode #map-wind:hover {
+    color: var(--dark-hover-color);
+    cursor: pointer;
   }
 
   .default-mode .map-box {
@@ -3478,6 +3514,11 @@
     font-size: 13px;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
   }
+  .default-mode #map-temperature:hover {
+    color: var(--default-hover-color);
+    cursor: pointer;
+  }
+
   .light-mode #map-temperature {
     background-color:var(--light-background-color);
     color: var(--light-text-color);
@@ -3495,6 +3536,11 @@
     font-size: 13px;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
   }
+  .light-mode #map-temperature:hover {
+    color: var(--light-hover-color);
+    cursor: pointer;
+  }
+
   .dark-mode #map-temperature {
     background-color:var(--dark-background-color);
     color: var(--dark-text-color);
@@ -3511,6 +3557,10 @@
     padding: 0px;
     font-size: 13px;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  }
+  .dark-mode #map-temperature:hover {
+    color: var(--dark-hover-color);
+    cursor: pointer;
   }
 
   .default-mode #map-precipitation {
@@ -3530,6 +3580,11 @@
     font-size: 13px;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
   }
+  .default-mode #map-precipitation:hover {
+    color: var(--default-hover-color);
+    cursor: pointer;
+  }
+
   .light-mode #map-precipitation {
     background-color:var(--light-background-color);
     color: var(--light-text-color);
@@ -3547,6 +3602,11 @@
     font-size: 13px;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
   }
+  .light-mode #map-precipitation:hover {
+    color: var(--light-hover-color);
+    cursor: pointer;
+  }
+
   .dark-mode #map-precipitation {
     background-color:var(--dark-background-color);
     color: var(--dark-text-color);
@@ -3563,6 +3623,10 @@
     padding: 0px;
     font-size: 13px;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  }
+  .dark-mode #map-precipitation:hover {
+    color: var(--dark-hover-color);
+    cursor: pointer;
   }
 
   .default-mode #map-wind {
@@ -3582,6 +3646,11 @@
     font-size: 13px;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
   }
+  .default-mode #map-wind:hover {
+    color: var(--default-hover-color);
+    cursor: pointer;
+  }
+
   .light-mode #map-wind {
     background-color:var(--light-background-color);
     color: var(--light-text-color);
@@ -3599,6 +3668,11 @@
     font-size: 13px;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
   }
+  .light-mode #map-wind:hover {
+    color: var(--light-hover-color);
+    cursor: pointer;
+  }
+
   .dark-mode #map-wind {
     background-color:var(--dark-background-color);
     color: var(--dark-text-color);
@@ -3615,6 +3689,10 @@
     padding: 0px;
     font-size: 13px;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  }
+  .dark-mode #map-wind:hover {
+    color: var(--dark-hover-color);
+    cursor: pointer;
   }
 
   .default-mode .map-box {
