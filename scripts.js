@@ -107,10 +107,6 @@ async function selectLocation(coordinates, place_name) {
 
     displayMapData();
 
-    mapBoxTemperature.style.display = 'none';
-    mapBoxPrecipitation.style.display = 'none';
-    mapBoxWind.style.display = 'none';
-
     // Update the input field value
     const locationInput = document.getElementById('location-input-field');
     locationInput.value = `${place_name}`;
@@ -427,6 +423,15 @@ function displayForecastDailyData(forecastDaily, weather) {
 function displayMapData() {
   const mapDataElement = document.getElementById('map-container');
   mapDataElement.style.display = 'grid';
+  const mapTitle = document.getElementById('map-title');
+  mapTitle.innerHTML = `<h2>Temperature Map</h2>`;
+  const mapBoxTemperature = document.getElementById('map-box-temperature');
+  mapBoxTemperature.style.display = 'block';
+  const mapBoxPrecipitation = document.getElementById('map-box-precipitation');
+  mapBoxPrecipitation.style.display = 'none';
+  const mapBoxWind = document.getElementById('map-box-wind');
+  mapBoxWind.style.display = 'none';
+  getTA2MapData(latitude, longitude);
 }
 
 // Function to handle search when button is clicked or Enter is pressed
