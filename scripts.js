@@ -109,7 +109,9 @@ async function selectLocation(coordinates, place_name) {
     getWNDMapData(latitude, longitude);
     displayMapData();
 
-    mapBoxTemperature.style.display = 'none';
+    const mapTitle = document.getElementById('map-title');
+    mapTitle.innerHTML = `<h2>Temperature Map</h2>`;
+    mapBoxTemperature.style.display = 'block';
     mapBoxPrecipitation.style.display = 'none';
     mapBoxWind.style.display = 'none';
 
@@ -411,10 +413,9 @@ function displayForecastHourlyData(forecastHourly, weather) {
 function displayForecastDailyData(forecastDaily, weather) {
   const forecastDailyDataElement = document.getElementById('forecast-daily-box');
   forecastDailyDataElement.innerHTML = '';
-  const weatherData = weather;
 
   forecastDaily.forEach(day => {
-    const date = new Date(day.dt * 1000); // Convert Unix timestamp to JavaScript date object
+    const date = new Date(day.dt * 1000);
     const dayOfWeek = date.toLocaleDateString('en-US', { weekday: 'long' });
     const weather = day.weather[0];
     const temperatureDay = Math.round(day.temp.day);
@@ -448,44 +449,6 @@ function displayForecastDailyData(forecastDaily, weather) {
 function displayMapData() {
   const mapDataElement = document.getElementById('map-container');
   mapDataElement.style.display = 'grid';
-}
-
-// Function to handle the search and retrieve weather data
-async function searchWeather() {
-  const locationInput = document.getElementById('location-input-field').value;
-  
-  // Fetch coordinates using MapBox geocoding API
-  const mapboxResponse = await fetch(`https://api.mapbox.com/geocoding/v5/mapbox.places/${locationInput}.json?access_token=${mapboxToken}`);
-  const mapboxData = await mapboxResponse.json();
-  const coordinates = mapboxData.features[0].center;
-
-  const latitude = coordinates[1];
-  const longitude = coordinates[0];
-  
-  const weatherData = await getWeatherData(`${latitude},${longitude}`);
-  const forecastHourlyData = await getForecastHourlyData(`${latitude},${longitude}`);
-  const forecastDailyData = await getForecastDailyData(`${latitude},${longitude}`);
-  
-  const mapContainer = document.getElementById('map-container');
-  mapContainer.style.display = 'grid';
-  const mapBoxTemperature = document.getElementById('map-box-temperature');
-  mapBoxTemperature.style.display = 'block';
-  const mapBoxPrecipitation = document.getElementById('map-box-precipitation');
-  mapBoxPrecipitation.style.display = 'block';
-  const mapBoxWind = document.getElementById('map-box-wind');
-  mapBoxWind.style.display = 'block';
-
-  displayCurrentWeather(weatherData, mapboxData.features[0].place_name);
-  displayForecastHourlyData(forecastHourlyData, weatherData);
-  displayForecastDailyData(forecastDailyData, weatherData);
-  getTA2MapData(latitude, longitude);
-  getPA0MapData(latitude, longitude);
-  getWNDMapData(latitude, longitude);
-  displayMapData();
-
-  mapBoxTemperature.style.display = 'none';
-  mapBoxPrecipitation.style.display = 'none';
-  mapBoxWind.style.display = 'none';
 }
 
 // Function to handle search when button is clicked or Enter is pressed
@@ -574,7 +537,7 @@ weatherAppIcon.addEventListener('click', () => {
   location.reload();
 });
 
-// Function to displat the map data
+// Function to display the map data
 const mapTemperature = document.getElementById('map-temperature');
 mapTemperature.addEventListener('click', () => {
   const mapTitle = document.getElementById('map-title');
