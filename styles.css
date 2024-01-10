@@ -1636,8 +1636,9 @@
   }
   .light-mode #map-container {
     width: calc(100% - 20px);
-    margin-top: 5px;
+    margin-top: 20px;
     margin-bottom: 10px;
+    margin-left: 10px;
     border-radius: 8px;
     display: grid;
     grid-template-columns: 30% 40% auto ;
@@ -1648,8 +1649,9 @@
   }
   .dark-mode #map-container {
     width: calc(100% - 20px);
-    margin-top: 5px;
+    margin-top: 20px;
     margin-bottom: 10px;
+    margin-left: 10px;
     border-radius: 8px;
     display: grid;
     grid-template-columns: 30% 40% auto ;

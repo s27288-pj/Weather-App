@@ -618,6 +618,8 @@ mapWind.addEventListener('click', () => {
 inputField.addEventListener('keypress', function(event) {
   if (event.key === 'Enter') {
     searchWeatherOnClick();
+    const searchButton = document.getElementById('search-button');
+    searchButton.addEventListener('click', searchWeatherOnClick);
   }
 });
 
