@@ -1178,21 +1178,21 @@ button {
 .default-mode .forecast-daily-item p {
   margin: 0px;
   padding: 0px;
-  font-size: 13px;
+  font-size: 11px;
   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
   font-weight: bold;
 }
 .light-mode .forecast-daily-item p {
   margin: 0px;
   padding: 0px;
-  font-size: 13px;
+  font-size: 11px;
   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
   font-weight: bold;
 }
 .dark-mode .forecast-daily-item p {
   margin: 0px;
   padding: 0px;
-  font-size: 13px;
+  font-size: 11px;
   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
   font-weight: bold;
 }
