@@ -85,7 +85,7 @@ function displayLocationSuggestions(suggestions) {
 
 // Function to handle the selection of a location from suggestions
 async function selectLocation(coordinates, place_name) {
-  const [longitude, latitude] = coordinates;
+  [longitude, latitude] = coordinates;
 
   try {
     const weatherData = await getWeatherData(latitude, longitude);
@@ -104,17 +104,10 @@ async function selectLocation(coordinates, place_name) {
     displayCurrentWeather(weatherData, place_name);
     displayForecastHourlyData(forecastHourlyData, weatherData);
     displayForecastDailyData(forecastDailyData, weatherData);
-    getTA2MapData(latitude, longitude);
-    getPA0MapData(latitude, longitude);
-    getWNDMapData(latitude, longitude);
+
     displayMapData();
 
-    const mapTitle = document.getElementById('map-title');
-    mapTitle.innerHTML = `<h2>Temperature Map</h2>`
-    mapBoxPrecipitation.style.display = 'block';
-    mapBoxWind.style.display = 'block';
-    mapBoxTemperature.style.display = 'block';
-
+    mapBoxTemperature.style.display = 'none';
     mapBoxPrecipitation.style.display = 'none';
     mapBoxWind.style.display = 'none';
 
@@ -172,26 +165,22 @@ async function getTA2MapData(latitude, longitude) {
   if (mapContainer && mapContainer._leaflet_id) {
     mapContainer._leaflet_id = null;
   }
+
   const TA2Map = L.map('map-box-temperature', {dragging: false, scrollWheelZoom: false, touchZoom: false}).setView([latitude, longitude], 10);
 
   const mapLayer =  L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 18,
     attribution: 'Map &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-}).addTo(TA2Map);
+})
 
   const weatherLayer = L.tileLayer('http://maps.openweathermap.org/maps/2.0/weather/{op}/{z}/{x}/{y}?appid={apiKey}&opacity=0.6&fill_bound=true', {
     apiKey: apiKey,
     maxZoom: 18,
     attribution: 'Weather &copy; <a href="https://openweathermap.org">OpenWeatherMap</a>',
     op: 'TA2',
-  }).addTo(TA2Map);
+  })
 
   TA2Map.zoomControl.remove();
-
-  // Remove all layers from TA2Map
-  TA2Map.eachLayer(function (layer) {
-    TA2Map.removeLayer(layer);
-  });
 
   // Add the layers to TA2Map
   mapLayer.addTo(TA2Map);
@@ -203,26 +192,22 @@ async function getPA0MapData(latitude, longitude) {
   if (mapContainer && mapContainer._leaflet_id) {
     mapContainer._leaflet_id = null;
   }
+
   const PA0Map = L.map('map-box-precipitation', {dragging: false, scrollWheelZoom: false, touchZoom: false}).setView([latitude, longitude], 10);
   
   const mapLayer =  L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 18,
     attribution: 'Map &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-}).addTo(PA0Map);
+})
 
   const weatherLayer = L.tileLayer('http://maps.openweathermap.org/maps/2.0/weather/{op}/{z}/{x}/{y}?appid={apiKey}&opacity=0.6&fill_bound=true', {
     apiKey: apiKey,
     maxZoom: 18,
     attribution: 'Weather &copy; <a href="https://openweathermap.org">OpenWeatherMap</a>',
     op: 'PA0',
-  }).addTo(PA0Map);
+  })
 
   PA0Map.zoomControl.remove();
-
-  // Remove all layers from PA0Map
-  PA0Map.eachLayer(function (layer) {
-    PA0Map.removeLayer(layer);
-  });
 
   // Add the layers to PA0Map
   mapLayer.addTo(PA0Map);
@@ -233,26 +218,22 @@ async function getWNDMapData(latitude, longitude) {
   if (mapContainer && mapContainer._leaflet_id) {
     mapContainer._leaflet_id = null;
   }
+
   const WNDMap = L.map('map-box-wind', {dragging: false, scrollWheelZoom: false, touchZoom: false}).setView([latitude, longitude], 10);
   
   const mapLayer =  L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 18,
     attribution: 'Map &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-}).addTo(WNDMap);
+})
 
   const weatherLayer = L.tileLayer('http://maps.openweathermap.org/maps/2.0/weather/{op}/{z}/{x}/{y}?appid={apiKey}&opacity=0.6&fill_bound=true', {
     apiKey: apiKey,
     maxZoom: 18,
     attribution: 'Weather &copy; <a href="https://openweathermap.org">OpenWeatherMap</a>',
     op: 'WND',
-  }).addTo(WNDMap);
+  })
 
   WNDMap.zoomControl.remove();
-
-  // Remove all layers from WNDMap
-  WNDMap.eachLayer(function (layer) {
-    WNDMap.removeLayer(layer);
-  });
 
   // Add the layers to WNDMap
   mapLayer.addTo(WNDMap);
@@ -551,6 +532,7 @@ mapTemperature.addEventListener('click', () => {
   mapBoxPrecipitation.style.display = 'none';
   const mapBoxWind = document.getElementById('map-box-wind');
   mapBoxWind.style.display = 'none';
+  getTA2MapData(latitude, longitude);
   window.scrollTo(0, document.body.scrollHeight);
 });
 
@@ -564,6 +546,7 @@ mapPrecipitation.addEventListener('click', () => {
   mapBoxPrecipitation.style.display = 'block';
   const mapBoxWind = document.getElementById('map-box-wind');
   mapBoxWind.style.display = 'none';
+  getPA0MapData(latitude, longitude);
   window.scrollTo(0, document.body.scrollHeight);
 });
 
@@ -577,6 +560,7 @@ mapWind.addEventListener('click', () => {
   mapBoxPrecipitation.style.display = 'none';
   const mapBoxWind = document.getElementById('map-box-wind');
   mapBoxWind.style.display = 'block';
+  getWNDMapData(latitude, longitude);
   window.scrollTo(0, document.body.scrollHeight);
 });
 
