@@ -161,8 +161,9 @@ async function getTA2MapData(latitude, longitude) {
   if (mapContainer && mapContainer._leaflet_id) {
     mapContainer._leaflet_id = null;
   }
+  mapContainer.innerHTML = '';
 
-  const TA2Map = L.map('map-box-temperature', {dragging: false, scrollWheelZoom: false, touchZoom: false}).setView([latitude, longitude], 10);
+  TA2Map = L.map('map-box-temperature', {dragging: false, scrollWheelZoom: false, touchZoom: false}).setView([latitude, longitude], 10);
 
   const mapLayer =  L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 18,
@@ -187,7 +188,9 @@ async function getPR0MapData(latitude, longitude) {
     mapContainer._leaflet_id = null;
   }
 
-  const PR0Map = L.map('map-box-precipitation', {dragging: false, scrollWheelZoom: false, touchZoom: false}).setView([latitude, longitude], 7);
+  mapContainer.innerHTML = '';
+
+  PR0Map = L.map('map-box-precipitation', {dragging: false, scrollWheelZoom: false, touchZoom: false}).setView([latitude, longitude], 7);
   
   const mapLayer =  L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 18,
@@ -211,7 +214,9 @@ async function getWNDMapData(latitude, longitude) {
     mapContainer._leaflet_id = null;
   }
 
-  const WNDMap = L.map('map-box-wind', {dragging: false, scrollWheelZoom: false, touchZoom: false}).setView([latitude, longitude], 10);
+  mapContainer.innerHTML = '';
+
+  WNDMap = L.map('map-box-wind', {dragging: false, scrollWheelZoom: false, touchZoom: false}).setView([latitude, longitude], 10);
   
   const mapLayer =  L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 18,
