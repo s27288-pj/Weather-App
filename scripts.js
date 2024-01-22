@@ -10,8 +10,8 @@ function loadCSSBasedOnUserAgent() {
 
 loadCSSBasedOnUserAgent();
 
-const apiKey = 'e9a0824a1e90c45f262aa4a15de73a21';
-const mapboxToken = 'pk.eyJ1IjoiczI3Mjg4IiwiYSI6ImNscjI2cGZveTA5eGsyam1wd20zb2dodjAifQ.e3K5AHnJvxXHclYQCIcnmg';
+const apiKey = '49b0abfbcd72adcfc70fc7f555198b19';
+const mapboxToken = 'pk.eyJ1IjoiczI3Mjg4IiwiYSI6ImNscnA4OW14cDAyZXAyam96Z25rZHdpd3QifQ.8r4lC0ndDr_xmmGzsWKjaQ';
 
 // const apiKey = process.env.REACT_APP_OPENWEATHERMAPAPI;
 // const mapboxToken = process.env.REACT_APP_MAPBOXTOKEN;
